@@ -1,0 +1,46 @@
+checklist for basic game setup
+1. define each card type -- copper, silver, gold, estate, duchy, province, curse (don't
+    actually need yet), cellar, market, merchant, militia, mine, moat, remodel, smithy, village, workshop
+    ***** this is probably the trickiest part -- figuring out how to handle the unique action cards might be tough
+
+2. build Game instance -- Players, PlayerDecks, BasicCards, KingdomCards
+
+3. shuffle decks, players each draw 5 cards 
+
+4. ON A PLAYER'S TURN THEY CAN: ---> this will be a loop that repeats WHILE (!GameWon)
+    a. start with 1 action, 1 buy
+    b. play action cards first (play some, none, or all -- depends on number of actions
+        player has, player can choose to not play an action if they want)
+    c. play treasure cards & buy until either they 1) run out of buys, 2) run out of money
+        3) don't want to buy anything else
+    d. end turn
+    e. draw 5 new cards from (shuffling when draw pile is empty)
+
+5. WIN CONDITIONS:
+    a. if Province pile is depleted OR 
+    b. if 3 piles of KingdomCards are depleted 
+    c. should be checked at the end of every turn 
+    d. when true, player with highest VP wins
+
+
+STARTING KINGDOM CARDS
+1. market -5
+2. village -3
+3. smithy -4
+4. mine -5
+5. festival -5
+6. chapel -2
+7. cellar -2
+8. garden -4
+9. vassal -3
+10. workshop -3
++BasicCards -- copper, silver, gold, estate, dutchy, province
+
+Gaku -- looking into .NET websockets
+Alex -- work on models 
+Chris -- collecting images, adding logic for action cards
+
+q's for Neil:
+1. how to get sockets to work in ASP.NET Core / entity
+2. how to test during development phase
+3. 

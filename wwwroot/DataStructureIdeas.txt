@@ -1,0 +1,64 @@
+//getting a basic layout of what classes will be needed & their properties & methods
+
+public class Card //could be abstract class 
+//CardType : Card +adds value, vp, &/|| action
+{
+    public string type; //treasure, victory, action, curse 
+    public string title; //Province, Chapel, Moat, Workshop, etc.
+    public int cost; //for player to add card to their deck
+    public int value; //buying power, if any, associated with card
+    public int vp; //victory points, if any, associated with card
+    public object actions; //possible actions of card
+
+    public Card(string cardType, string cardTitle, int cardCost, int cardValue, int cardVP, object cardActions)
+    {
+        type = cardType;
+        title = cardTitle;
+        cost = cardCost;
+        value = cardValue;
+        vp = cardVP;
+        actions = cardActions;
+    }
+
+}
+Card Cellar = new Card()
+{"Action", "Cellar", 2, 0, 0, {action=1, unique="discard any number of cards, then draw that many"}};
+
+public class Player
+{
+    public string Name;
+    public object Stats;
+    public List<Card> Deck; //at initialization = 7 Copper, 3 Estate
+    public List<Card> Hand;
+
+    //turn stats:
+    public int Actions; //resets to 1 every turn
+    public int Buys; //resets to 1 every turn
+    public int Money; //resets to 0 every turn Money += Card.Value
+
+    //methods:
+    //Draw(), Discard(), Buy(), ...?? unique actions should be methods of the card?
+}
+
+public class Game
+{
+    public List<Player> Players; //game:players == 1:many
+    public List<Card> Trash; //this could be a dict instead of a list
+
+    public object BasicCards; //this could be a list instead of dict
+    // might look something like:
+    // {
+    //     Estate = 12, (2-8)
+    //     Duchy = 12, (2-8)
+    //     Province = 12, (2-8)
+    //     Curse = depends on # of players 2-10, 3-20, 4-30,
+    //     Copper = 60
+    //     Silver = 40,
+    //     Gold = 30
+    // }
+    public object KingdomCards; //this would be comprised of the action cards chosen at the beginning of the game, or the 10 recommended beginner types (cellar, market, militia, mine, moat, remodel, smithy, village, woodcutter, workshop)
+    public int PlayerTurn; //to keep track of whose turn it is (P1, p2, p3...)
+    public bool GameWon; //some way to check if win conditions are met
+}
+
+
