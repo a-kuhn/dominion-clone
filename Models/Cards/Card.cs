@@ -13,5 +13,11 @@ namespace DominionClone.Models
         public string Title { get; set; }
         public int Cost { get; set; }
 
+        // public Card(string type, string title, int cost)
+        // {
+        //     Type = type;
+        //     Title = title;
+        //     Cost = cost;
+        // }
     }
 }
