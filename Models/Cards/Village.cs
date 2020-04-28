@@ -5,9 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DominionClone.Models
 {
-    public class VictoryCard : Card
+    public class Village : Card
     {
-        public int VP { get; set; }
-        
+        public int DrawCount { get; set; } = 1;
+        public int ActionCount { get; set; } = 2;
+
     }
 }
