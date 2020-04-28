@@ -40,7 +40,7 @@ Gaku -- looking into .NET websockets
 Alex -- work on models 
 Chris -- collecting images, adding logic for action cards
 
-q's for Neil:
-1. how to get sockets to work in ASP.NET Core / entity
-2. how to test during development phase
-3. 
+ASK NEIL: 
+    1) How to use Web Sockets with C# stack
+    2) How to test before deployment / during development phase
+    3) How to collaborate on same MySQL db
