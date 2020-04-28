@@ -35,9 +35,20 @@ namespace DominionClone.Models
         [Required]
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public List<Card> Hand { get; set; }
-        public List<Card> Deck { get; set; }
+        public Deck PlayerDeck { get; set; }
 
         //methods: 
         //Draw(cardFromDeck), Buy(cardFromGame), Play(cardFromHand), Trash(cardFromHand)
+
+        public void Draw()
+        {
+            Card addToHand = PlayerDeck.Deal();
+            Hand.Add(addToHand);
+        }
+
+        public void Buy(Card cardToBuy)
+        {
+            PlayerDeck.AddToDeck(cardToBuy);
+        }
     }
 }

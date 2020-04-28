@@ -9,8 +9,8 @@ namespace DominionClone.Models
     {
         [Key]
         public int GameId { get; set; }
-        public object BasicCards { get; set; }
-        public object KingdomCards { get; set; }
+        public List<Card> BasicCards { get; set; }
+        public List<Card> KingdomCards { get; set; }
         public int PlayerTurn { get; set; }
         public bool GameWon { get; set; } //not sure this is necessary 
 

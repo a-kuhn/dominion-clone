@@ -1,11 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DominionClone.Models
 {
-    public class Deck
+    public class Deck 
     {
         [Key]
         public int DeckId { get; set; }
@@ -22,7 +23,19 @@ namespace DominionClone.Models
 
         //do we want a constructor here with the starter deck? 7 copper, 3 estates
 
+        
         //methods:
         //shuffle, deal
+        public Card Deal()
+        {
+            Card dealtCard = Cards[0];
+            Cards.RemoveAt(0);
+            return dealtCard;
+        }
+
+        public void AddToDeck(Card cardToAdd)
+        {
+            Cards.Add(cardToAdd);
+        }
     }
 }
