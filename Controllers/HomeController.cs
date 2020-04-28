@@ -15,6 +15,12 @@ namespace DominionClone.Controllers
             return View();
         }
 
+        [HttpGet("/chatTest")]
+        public IActionResult ChatTest()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
