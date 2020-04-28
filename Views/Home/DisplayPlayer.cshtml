@@ -1,0 +1,15 @@
+@model Player
+
+
+<h2>Your Turn @Model.Name</h2>
+
+<ul>
+    @foreach(Card card in Model.Hand){
+        @* <a class="btn btn-link" asp-area="" asp-controller="Event" asp-action="New"> <button> card.Title </button> </a> *@
+        <li>card.Title</li>
+    }
+    
+</ul>
+
+<a class="btn btn-link" asp-area="" asp-controller="Event" asp-action="New"> <button> End Turn </button> </a>
+<a class="btn btn-link" asp-area="" asp-controller="Event" asp-action="New"> <button> Start Game </button> </a>
