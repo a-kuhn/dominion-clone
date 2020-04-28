@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DominionClone.Models
+namespace DominionClone.Models.Cards
 {
-    public class Silver : Card
+    public class Smithy
     {
-        public int Value { get; set; } = 2;
+        public int DrawCount { get; set; } = 3;
     }
 }
