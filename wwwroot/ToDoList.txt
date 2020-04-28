@@ -34,7 +34,7 @@ STARTING KINGDOM CARDS
 8. garden -4
 9. vassal -3
 10. workshop -3
-+BasicCards -- copper, silver, gold, estate, dutchy, province
++BasicCards -- copper, silver, gold, estate, duchy, province
 
 Gaku -- looking into .NET websockets
 Alex -- work on models 
