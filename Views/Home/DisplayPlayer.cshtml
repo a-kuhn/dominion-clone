@@ -1,10 +1,21 @@
-@model Player
+@model Game
+
+@{
+    Player CurrentPlayer = Model.Players[Model.PlayerTurn];
+}
 
 
-<h2>Your Turn @Model.Name</h2>
+<h2>Your Turn @CurrentPlayer.Name</h2>
+
+@* To display the Tresure and VP cards name along with amount of each card left*@
+<ul>
+    foreach(KeyValuePair<string, int> basic in CurrentPlayer.BasicCards)
+    <li>basic.Key basic.Value</li>
+</ul>
 
 <ul>
-    @foreach(Card card in Model.Hand){
+    @foreach(Card card in CurrentPlayer.Hand){
+        @* An a tag to click on to play that card *@
         @* <a class="btn btn-link" asp-area="" asp-controller="Event" asp-action="New"> <button> card.Title </button> </a> *@
         <li>card.Title</li>
     }
@@ -12,4 +23,5 @@
 </ul>
 
 <a class="btn btn-link" asp-area="" asp-controller="Event" asp-action="New"> <button> End Turn </button> </a>
+
 <a class="btn btn-link" asp-area="" asp-controller="Event" asp-action="New"> <button> Start Game </button> </a>
