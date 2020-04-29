@@ -15,8 +15,8 @@ namespace DominionClone.Controllers
             return View();
         }
 
-        [HttpGet("/DisplayPlayer")]
-        public IActionResult DisplayPlayer()
+        [HttpGet("/DisplayBoard")]
+        public IActionResult DisplayBoard()
         {
             return View();
         }
