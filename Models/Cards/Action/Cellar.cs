@@ -9,13 +9,22 @@ namespace DominionClone.Models
     {
         // +1 Action;
         // discard any # of cards, then draw that many
-        public void Play(Player player)
+        public override void Play(Player player)
         {
             int discardCount = 0;
+            List<int> discardIdx = new List<int>();
             while (discardCount <= player.Hand.Count)
             {
                 //prompt player to select cards from hand to discard (discardCount++) or submit
                 //on submit, all selected cards are discarded and deck.Draw() discardCount times
+            }
+            foreach (int idx in discardIdx)
+            {
+                player.Trash(idx);
+            }
+            for (int i = 0; i < discardCount; i++)
+            {
+                player.Draw();
             }
         }
 

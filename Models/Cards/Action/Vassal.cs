@@ -8,11 +8,17 @@ namespace DominionClone.Models
     public class Vassal : Card
     {
         // +2 treasure; discard top card of your deck, if it's an action card, player may choose to play it
-
-        // cardDrawn = player.Draw();
-        // if (cardDrawn.type == Action)
-        //    {player can choose to play or discard cardDrawn}
-        // else {player.Discard(cardDrawn)}
+        public override void Play(Player player)
+        {
+            player.TreasureValueTotal += 2;
+            Card cardDrawn = player.Deck[0];
+            player.Deck.RemoveAt(0);
+            if (cardDrawn.Type == "Action")
+               {
+                   //player can choose if they want to play cardDrawn
+               }
+            else {player.DiscardPile.Add(cardDrawn);}
+        }
 
         public Vassal(string type = "Action", string title = "Vassal", int cost = 3) : base(type, title, cost) { }
     }
