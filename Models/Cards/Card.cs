@@ -24,7 +24,7 @@ namespace DominionClone.Models
             TreasureValue = 0;
         }
 
-        public void Play(Player player)
+        public virtual void Play(Player player)
         {
             player.TreasureValueTotal += TreasureValue;
         }
