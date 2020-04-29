@@ -9,6 +9,6 @@ namespace DominionClone.Models
     {
         //gain 1 card costing up to 4 Treasure
 
-        public Workshop(string type = "Action", string title = "Workshop", int cost = 3) : base(type, title, cost) { }
+        public Workshop(string type = "Action", string title = "Workshop", int cost = 3, int vpValue = 0, int treasureValue = 0) : base(type, title, cost, vpValue, treasureValue) { }
     }
 }

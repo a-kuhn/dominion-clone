@@ -7,7 +7,6 @@ namespace DominionClone.Models
 {
     public class Province : Card
     {
-        public int VPValue { get; set; } = 6;
-        public Province(string type = "Victory", string title = "Province", int cost = 8) : base(type, title, cost) { }
+        public Province(string type = "Victory", string title = "Province", int cost = 8, int vpValue = 6, int treasureValue = 0) : base(type, title, cost, vpValue, treasureValue) { }
     }
 }

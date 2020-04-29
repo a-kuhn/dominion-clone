@@ -2,75 +2,177 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace DominionClone.Models
 {
     public class Game
     {
-        public List<Card> BasicCards { get; set; }
-        // public List<Card> KingdomCards { get; set; } //10 sets of 10 Action cards
-        public int PlayerTurn { get; set; }
-        public List<Player> Players { get; set; }
+        // All Victory and Treasure Cards on the Field live in this list
+        public List<Card> BasicCards { get; set; } 
+        
+        // All Action Cards on the Field live in this list. Starts with 10 sets each of 10 types.
+        // public List<Card> KingdomCards { get; set; }
+        
+        // All Cards in the Trash Pile
         public List<Card> Trash { get; set; }
 
-        //do we want to store the log of turns here? what might that look like?
+        // Int to tell who's turn it is, 0 or 1. (i.e. if PlayerTurn is 0, it's Players[0]'s turn)
+        public int PlayerTurn { get; set; }
+        
+        // List of all Players
+        public List<Player> Players { get; set; }
 
-        //do we want a method here to check win conditions?
+        // Turns Passed since Game Started
+        public int TurnsPassed { get; set; }
+        // -> Down the road, we could turn this into a more comprehensive log of turns and actions!
+        
 
-        //constructor: 
-        //2 players (names=King & Queen), PlayerTurn=0 (player1), empty Trash, BasicCards
-        Player p1 = new Player("King");
-        Player p2 = new Player("Queen");
 
-        //60 Copper, 40 Silver, 30 Gold -->really should be what's left over after making player's starting decks
-        //8 each of Estate, Duchy, Province
-        List<Card> baseSet;
+        
+        // Constructor: 
+        public Game()
+        {
+            // Build the starting field cards and trash.
+            BasicCards = BuildBasicCards();
+            // KingdomCards = BuildKingdomCards();
+            Trash = new List<Card>();
+            
+            // Game starts with first player's turn and on Turn #1
+            PlayerTurn = 0;
+            TurnsPassed = 1;
+
+            // Builds a list with all Players (Currently 2)
+            Player p1 = new Player("King");
+            Player p2 = new Player("Queen");
+            Players = new List<Player>() { p1, p2 };
+
+            // Deal 7 copper and 3 Estate to each Player from the Field
+            foreach (Player player in Players)
+            {
+                DealStartingCards(player);
+            }
+        }
+
+        // Helper Method for the Constructor to initialize the beginning set of cards
+            // Treasures: 60 Copper, 40 Silver, 30 Gold | Victory: 8 Each of Estate, Duchy, Province
         public List<Card> BuildBasicCards()
         {
+            // This used to be outside of this method. But that might be confusing (i.e. Game shouldnt' have a .baseSet ???)
+            // It should only live in the context of this helper method!
+            List<Card> baseSet = new List<Card>();
+            
             for (int i = 0; i < 60; i++)
             {
                 Copper Copper = new Copper();
                 baseSet.Add(Copper);
             }
-
-            for (int i = 0; i < 40; i++)
-            {
-                Silver Silver = new Silver();
-                baseSet.Add(Silver);
-            }
-
-            for (int i = 0; i < 30; i++)
-            {
-                Gold Gold = new Gold();
-                baseSet.Add(Gold);
-            }
-
-            for (int i = 0; i < 8; i++)
-            {
-                Estate Estate = new Estate();
-                baseSet.Add(Estate);
-            }
-
-            for (int i = 0; i < 8; i++)
-            {
-                Duchy Duchy = new Duchy();
-                baseSet.Add(Duchy);
-            }
-
-            for (int i = 0; i < 8; i++)
-            {
-                Province Province = new Province();
-                baseSet.Add(Province);
-            }
+            // The rest is the same for different cards and # copies, so converted the rest to shorthand!!
+            for (int i = 0; i < 40; i++){baseSet.Add(new Silver());}
+            for (int i = 0; i < 30; i++){baseSet.Add(new Gold());}
+            for (int i = 0; i < 8; i++){baseSet.Add(new Estate());}
+            for (int i = 0; i < 8; i++){baseSet.Add(new Duchy());}
+            for (int i = 0; i < 8; i++){baseSet.Add(new Province());}
             return baseSet;
         }
 
-        public Game()
+        // Helper Method for the Constructor to deal each player's starting Deck
+        // 7 Copper and 3 Estate here, but assuming it varies by expansion, it's nice to come back and only have to adjust this method
+        public void DealStartingCards(Player player)
         {
-            BasicCards = BuildBasicCards();
-            PlayerTurn = 0;
-            Players = new List<Player>() { p1, p2 };
-            Trash = new List<Card>();
+            // Deal the first 7 Coppers found in BasicCards to player
+            for (int i = 0; i < 7; i++)
+            {
+                Card cardToDeal = BasicCards.FirstOrDefault(c=>c.Title == "Copper");
+                if (cardToDeal != null)
+                {
+                    player.Deck.Add(cardToDeal);
+                }
+                else 
+                {
+                    // panic
+                }
+            }
+            // Deal the first 3 Estates found in BasicCards to player
+            for (int i = 0; i < 3; i++)
+            {
+                Card cardToDeal = BasicCards.FirstOrDefault(c=>c.Title == "Estate");
+                if (cardToDeal != null)
+                {
+                    player.Deck.Add(cardToDeal);
+                }
+                else 
+                {
+                    // panic
+                }
+            }
+
+            return;
+        }
+            
+        // Helper Method for the Controller to check if Game is finished
+        public bool GameFinished()
+        {
+            /*
+                CONDITION #1: All Providences are removed from field
+            */
+            // Slower method: Loop over all cards on field and count Providences
+            // int providenceCount = 0;
+            // foreach (Card card in BasicCards)
+            // {
+            //     if (card.Title == "Providence")
+            //     {
+            //         providenceCount++;
+            //     }
+            // }
+            // if (providenceCount == 0)
+            // {
+            //     finished = true;
+            // }
+            
+            // Faster method: If there are no more Providences, LINQ returns null, so we use that as the condition
+            Card firstProvidence = BasicCards.FirstOrDefault(c=>c.Title == "Providence");
+            if (firstProvidence == null) 
+            {
+                return true;
+            }
+
+            /* 
+                Condition #2: 3 Kinds of any card are removed from field
+            */
+            // Make counter dictionary
+            Dictionary<string, int> counters = new Dictionary<string, int>();
+            counters.Add("Duchy",0);
+            counters.Add("Estate",0);
+            counters.Add("Copper",0);
+            counters.Add("Silver",0);
+            counters.Add("Gold",0);
+
+            // Build counter dictionary
+            foreach (Card card in BasicCards)
+            {
+                if (card.Title == "Duchy"){ counters["Duchy"]++;}
+                if (card.Title == "Estate"){ counters["Estate"]++;}
+                if (card.Title == "Copper"){ counters["Copper"]++;}
+                if (card.Title == "Silver"){ counters["Silver"]++;}
+                if (card.Title == "Gold"){ counters["Gold"]++;}
+            }
+
+            // Count the zeros
+            int depleted_card_types = 0;
+            foreach (KeyValuePair<string, int> item in counters)
+            {
+                if (item.Value == 0)
+                {
+                    depleted_card_types++;
+                }
+                if (depleted_card_types >= 3)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

@@ -33,7 +33,7 @@ namespace DominionClone
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            services.AddSession();
             services.AddSignalR();
         }
 
@@ -49,6 +49,7 @@ namespace DominionClone
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseSession();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSignalR(routes =>

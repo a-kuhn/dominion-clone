@@ -9,6 +9,6 @@ namespace DominionClone.Models
     {
         // 1 VP per 10 cards in deck (round down)
         // deck.VP += Math.floor(deck.Count/10) --> needs to be recalculated every time players buys new card
-        public Gardens(string type = "Action", string title = "Gardens", int cost = 4) : base(type, title, cost) { }
+        public Gardens(string type = "Action", string title = "Gardens", int cost = 4, int vpValue = 0, int treasureValue = 0) : base(type, title, cost, vpValue, treasureValue) { }
     }
 }
