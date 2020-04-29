@@ -58,8 +58,6 @@ namespace DominionClone.Models
             // Treasures: 60 Copper, 40 Silver, 30 Gold | Victory: 8 Each of Estate, Duchy, Province
         public List<Card> BuildBasicCards()
         {
-            // This used to be outside of this method. But that might be confusing (i.e. Game shouldnt' have a .baseSet ???)
-            // It should only live in the context of this helper method!
             List<Card> baseSet = new List<Card>();
             
             for (int i = 0; i < 60; i++)
@@ -117,25 +115,32 @@ namespace DominionClone.Models
                 CONDITION #1: All Providences are removed from field
             */
             // Slower method: Loop over all cards on field and count Providences
-            // int providenceCount = 0;
-            // foreach (Card card in BasicCards)
-            // {
-            //     if (card.Title == "Providence")
-            //     {
-            //         providenceCount++;
-            //     }
-            // }
-            // if (providenceCount == 0)
-            // {
-            //     finished = true;
-            // }
-            
-            // Faster method: If there are no more Providences, LINQ returns null, so we use that as the condition
-            Card firstProvidence = BasicCards.FirstOrDefault(c=>c.Title == "Providence");
-            if (firstProvidence == null) 
+            int providenceCount = 0;
+            foreach (Card card in BasicCards)
+            {
+                if (card.Title == "Providence")
+                {
+                    providenceCount++;
+                }
+            }
+            if (providenceCount == 0)
             {
                 return true;
             }
+            
+            // Faster method: If there are no more Providences, LINQ returns null, so we use that as the condition
+            // Card firstProvidence = BasicCards.FirstOrDefault(c=>c.Title == "Providence");
+            // if (firstProvidence == null) 
+            // {
+            //     Console.WriteLine("NO MORE PROVINCES");
+            //     Console.WriteLine("NO MORE PROVINCES");
+            //     Console.WriteLine("NO MORE PROVINCES");
+            //     Console.WriteLine("NO MORE PROVINCES");
+            //     Console.WriteLine("NO MORE PROVINCES");
+            //     Console.WriteLine("NO MORE PROVINCES");
+            //     Console.WriteLine("NO MORE PROVINCES");
+            //     return true;
+            // }
 
             /* 
                 Condition #2: 3 Kinds of any card are removed from field

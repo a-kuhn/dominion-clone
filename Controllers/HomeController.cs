@@ -20,14 +20,23 @@ namespace DominionClone.Controllers
         [HttpGet("/displayBoard")]
         public IActionResult DisplayPlayer()
         {
+            Game currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
             // First Render sent from Index - if there is no game in session, initialize one
-            if (HttpContext.Session.GetObjectFromJson<Game>("currentGame") == null)
+            if (currentGame == null)
             {
-                Game newGame = new Game();
-                HttpContext.Session.SetObjectAsJson("currentGame",newGame);
+                currentGame = new Game();
             }
 
-            Game currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            Console.WriteLine("Current Game Info");
+            Console.WriteLine("# Cards:" + currentGame.BasicCards.Count);
+            Console.WriteLine("Player 1's Hand:" + currentGame.Players[0].Hand.Count);
+            Console.WriteLine("Player 1's Deck:" + currentGame.Players[0].Deck.Count);
+            Console.WriteLine("Player 1's DiscardPile:" + currentGame.Players[0].DiscardPile.Count);
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            
+            HttpContext.Session.SetObjectAsJson("currentGame",currentGame);
+            
             // if currentGame IS over, redirect to game finished screen
             // if (currentGame.GameFinished())
             // {
