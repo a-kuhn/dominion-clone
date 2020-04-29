@@ -15,6 +15,6 @@ namespace DominionClone.Models
         public int BuyCount { get; set; } = 1;
         public int TreasureCount { get; set; } = 1;
 
-        public Market(string type = "Action", string title = "Market", int cost = 5, int vpValue = 0, int treasureValue = 0) : base(type, title, cost, vpValue, treasureValue) { }
+        public Market(string type = "Action", string title = "Market", int cost = 5) : base(type, title, cost) { }
     }
 }

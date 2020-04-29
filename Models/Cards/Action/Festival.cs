@@ -9,6 +9,6 @@ namespace DominionClone.Models
     {
         //+2 Actions; +1 Buy; +2 Treasure
 
-        public Festival(string type="Action", string title="Festival", int cost=5, int vpValue = 0, int treasureValue = 0) : base(type, title, cost, vpValue, treasureValue) { }
+        public Festival(string type="Action", string title="Festival", int cost=5) : base(type, title, cost) { }
     }
 }

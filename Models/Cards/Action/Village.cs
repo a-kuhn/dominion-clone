@@ -11,7 +11,7 @@ namespace DominionClone.Models
         public int DrawCount { get; set; } = 1;
         public int ActionCount { get; set; } = 2;
 
-        public Village(string type = "Action", string title = "Village", int cost = 3, int vpValue = 0, int treasureValue = 0) : base(type, title, cost, vpValue, treasureValue) { }
+        public Village(string type = "Action", string title = "Village", int cost = 3) : base(type, title, cost) { }
 
     }
 }

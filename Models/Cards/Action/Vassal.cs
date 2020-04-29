@@ -14,6 +14,6 @@ namespace DominionClone.Models
         //    {player can choose to play or discard cardDrawn}
         // else {player.Discard(cardDrawn)}
 
-        public Vassal(string type = "Action", string title = "Vassal", int cost = 3, int vpValue = 0, int treasureValue = 0) : base(type, title, cost, vpValue, treasureValue) { }
+        public Vassal(string type = "Action", string title = "Vassal", int cost = 3) : base(type, title, cost) { }
     }
 }

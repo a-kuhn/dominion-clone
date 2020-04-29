@@ -19,6 +19,6 @@ namespace DominionClone.Models
             }
         }
 
-        public Chapel(string type = "Action", string title = "Chapel", int cost = 2, int vpValue = 0, int treasureValue = 0) : base(type, title, cost, vpValue, treasureValue) { }
+        public Chapel(string type = "Action", string title = "Chapel", int cost = 2) : base(type, title, cost) { }
     }
 }
