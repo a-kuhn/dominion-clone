@@ -9,7 +9,7 @@ namespace DominionClone.Models
     {
         // +1 Action;
         // discard any # of cards, then draw that many
-        public void Play(Player player)
+        public override void Play(Player player)
         {
             int discardCount = 0;
             while (discardCount <= player.Hand.Count)
