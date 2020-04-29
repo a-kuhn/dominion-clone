@@ -7,8 +7,8 @@ namespace DominionClone.Models
 {
     public class Gardens : Card
     {
-        // cost = 4;
         // 1 VP per 10 cards in deck (round down)
         // deck.VP += Math.floor(deck.Count/10) --> needs to be recalculated every time players buys new card
+        public Gardens(string type = "Action", string title = "Gardens", int cost = 4) : base(type, title, cost) { }
     }
 }

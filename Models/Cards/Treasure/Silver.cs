@@ -7,6 +7,7 @@ namespace DominionClone.Models
 {
     public class Silver : Card
     {
-        public int Value { get; set; } = 2;
+        public int TreasureValue { get; set; } = 2;
+        public Silver(string type = "Action", string title = "Silver", int cost = 3) : base(type, title, cost) { }
     }
 }

@@ -7,8 +7,10 @@ namespace DominionClone.Models
 {
     public class Mine : Card
     {
-        // trash a treasure card up from your hand
+        // trash a treasure card from your hand
         // Gain a treasure card up to 3 more Cost than what was trashed
         public int TrashTreasure { get; set; } = 1;
+
+        public Mine(string type = "Action", string title = "Mine", int cost = 5) : base(type, title, cost) { }
     }
 }

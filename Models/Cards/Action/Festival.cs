@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DominionClone.Models.Cards
+namespace DominionClone.Models
 {
     public class Festival : Card
     {
-        public int ActionCount { get; set; } = 2;
-        public int BuyCount { get; set; } = 1;
-        public int TreasureCount { get; set; } = 2;
+        //+2 Actions; +1 Buy; +2 Treasure
+
+        public Festival(string type="Action", string title="Festival", int cost=5) : base(type, title, cost){}
     }
 }

@@ -7,8 +7,7 @@ namespace DominionClone.Models
 {
     public class Cellar : Card
     {
-        //cost = 2;
-        // +1 Actions;
+        // +1 Action;
         // discard any # of cards, then draw that many
         public void Play(Player player)
         {
@@ -19,5 +18,7 @@ namespace DominionClone.Models
                 //on submit, all selected cards are discarded and deck.Draw() discardCount times
             }
         }
+
+        public Cellar(string type="Action", string title="Cellar", int cost=2) : base(type, title, cost){}
     }
 }
