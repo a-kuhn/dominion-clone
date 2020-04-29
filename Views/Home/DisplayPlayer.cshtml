@@ -7,7 +7,7 @@
 <body class="bg-light">
     
 
-    <h2 class="text-center">Your Turn @CurrentPlayer.Name</h2>
+    <h2 class="text-center">Your Turn, @CurrentPlayer.Name!</h2>
 
     @* To display the Tresure and VP cards name along with amount of each card left*@
     @* <ul>
@@ -101,5 +101,12 @@
         <a class="btn btn-success text-center mr-3" asp-area="" asp-controller="Event" asp-action="New">End Turn</a>
         <a class="btn btn-danger text-center" asp-area="" asp-controller="Event" asp-action="New">End Game</a>
     </div>
-    
 </body>
+
+@foreach (var card in CurrentPlayer.Hand)
+{
+    <h1>@card.Title</h1>
+}
+<h1>@CurrentPlayer.Hand.Count</h1>
+<h1>@CurrentPlayer.Deck.Count</h1>
+<h1>@CurrentPlayer.DiscardPile.Count</h1>
