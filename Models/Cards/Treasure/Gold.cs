@@ -8,6 +8,6 @@ namespace DominionClone.Models
     public class Gold : Card
     {
         public int TreasureValue { get; set; } = 3;
-        public Gold(string type = "Action", string title = "Gold", int cost = 6) : base(type, title, cost) { }
+        public Gold(string type = "Treasure", string title = "Gold", int cost = 6) : base(type, title, cost) { }
     }
 }
