@@ -7,7 +7,6 @@ namespace DominionClone.Models
 {
     public class Chapel : Card
     {
-        //cost = 2;
         // trash up to 4 cards from your hand
         public void Play()
         {
@@ -19,5 +18,7 @@ namespace DominionClone.Models
                 //on submit, selected cards are trashed (remove from player's deck, add to game's trash)
             }
         }
+
+        public Chapel(string type = "Action", string title = "Chapel", int cost = 2) : base(type, title, cost) { }
     }
 }
