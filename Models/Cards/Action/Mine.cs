@@ -11,6 +11,6 @@ namespace DominionClone.Models
         // Gain a treasure card up to 3 more Cost than what was trashed
         public int TrashTreasure { get; set; } = 1;
 
-        public Mine(string type = "Action", string title = "Mine", int cost = 5) : base(type, title, cost) { }
+        public Mine(string type = "Action", string title = "Mine", int cost = 5, int vpValue = 0, int treasureValue = 0) : base(type, title, cost, vpValue, treasureValue) { }
     }
 }

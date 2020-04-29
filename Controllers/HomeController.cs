@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DominionClone.Models;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace DominionClone.Controllers
 {
@@ -15,6 +17,55 @@ namespace DominionClone.Controllers
             return View();
         }
 
+        [HttpGet("/displayBoard")]
+        public IActionResult DisplayPlayer()
+        {
+            // First Render sent from Index - if there is no game in session, initialize one
+            if (HttpContext.Session.GetObjectFromJson<Game>("currentGame") == null)
+            {
+                Game newGame = new Game();
+                HttpContext.Session.SetObjectAsJson("currentGame",newGame);
+            }
+
+            Game currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
+            // if currentGame IS over, redirect to game finished screen
+            // if (currentGame.GameFinished())
+            // {
+            //     return RedirectToAction("GameComplete");
+            // }
+            // if currentGame is NOT over, keep rendering the same board with updated stats
+            return View(currentGame);
+        }
+
+
+        // SAMPLE: Each action/purchase will be a button on the View that calls its respective method here.
+        [HttpPost("/buyCard")]
+        public IActionResult BuyCard(String cardTitleToBuy)
+        {
+            Game currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
+            
+            // Find the first card with given title on the Game Field
+            // Add it to Player's Discard
+            // Remove it from field
+
+            HttpContext.Session.SetObjectAsJson("currentGame",currentGame);
+            return RedirectToAction("DisplayPlayer");
+        }
+
+
+        [HttpGet("/gameComplete")]
+        public IActionResult GameComplete()
+        {
+            Game currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
+            if (currentGame == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(currentGame);
+        }
+
+
+        // Page to test SignalR... delete if obsolete
         [HttpGet("/chatTest")]
         public IActionResult ChatTest()
         {
@@ -30,6 +81,20 @@ namespace DominionClone.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+
+    public static class SessionExtensions
+    {
+        public static void SetObjectAsJson(this ISession session, string key, object value)
+        {
+            session.SetString(key, JsonConvert.SerializeObject(value));
+        }
+
+        public static T GetObjectFromJson<T>(this ISession session, string key)
+        {
+            string value = session.GetString(key);
+            return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
         }
     }
 }

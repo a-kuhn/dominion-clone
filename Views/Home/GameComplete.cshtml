@@ -1,0 +1,14 @@
+@model Game
+<h2>Game completed in @Model.TurnsPassed turns.</h2>
+
+@{
+    Player winner = Model.Players[0];
+    foreach (Player player in Model.Players)
+    {
+        if (player.GetVictoryPointTotal() > winner.GetVictoryPointTotal())
+        {
+            winner = player;
+        }
+    }
+    <h2>@winner.Name is the winner!</h2>
+}

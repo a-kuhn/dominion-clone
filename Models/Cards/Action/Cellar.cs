@@ -19,6 +19,6 @@ namespace DominionClone.Models
             }
         }
 
-        public Cellar(string type="Action", string title="Cellar", int cost=2) : base(type, title, cost){}
+        public Cellar(string type="Action", string title="Cellar", int cost=2, int vpValue = 0, int treasureValue = 0) : base(type, title, cost, vpValue, treasureValue) { }
     }
 }
