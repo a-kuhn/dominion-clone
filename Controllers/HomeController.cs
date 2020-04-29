@@ -15,6 +15,12 @@ namespace DominionClone.Controllers
             return View();
         }
 
+        [HttpGet("/DisplayPlayer")]
+        public IActionResult DisplayPlayer()
+        {
+            return View();
+        }
+
         [HttpGet("/chatTest")]
         public IActionResult ChatTest()
         {
