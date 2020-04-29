@@ -35,9 +35,23 @@ namespace DominionClone.Models
 
         // [Required]
         // public DateTime UpdatedAt { get; set; } = DateTime.Now;
+        public string Name { get; set; }
+
         public List<Card> Hand { get; set; }
         public List<Card> Deck { get; set; }
         public List<Card> DiscardPile { get; set; }
+
+        public Player(string name)
+        {
+            Name = name;
+            Hand = new List<Card>();
+            Deck = new List<Card>()
+            {
+                //start of game deck = 7 Copper, 3 Estate
+                new Copper(), new Copper(), new Copper(), new Copper(), new Copper(), new Copper(), new Copper(), new Estate(), new Estate(), new Estate()
+            };
+            DiscardPile = new List<Card>();
+        }
 
         public void Draw()
         {
