@@ -1,74 +1,105 @@
-
 @model Game
+
 @{
     Player CurrentPlayer = Model.Players[Model.PlayerTurn];
 }
 
-
-<h2 class="text-center">Your Turn @CurrentPlayer.Name</h2>
-
-@* To display the Tresure and VP cards name along with amount of each card left*@
-@* <ul>
-    foreach(Card basic in CurrentPlayer.baseSet)
-    <li class="text-center">basic.Title basic.TreasureValue</li>
-</ul> *@
-
-@* <ul>
-    @foreach(Card card in CurrentPlayer.Hand){
-        An a tag to click on to play that card
-        <a class="btn btn-link" asp-area="" asp-controller="Event" asp-action="New"> <button> card.Title </button> </a>
-        <li class="text-center">card.Title</li>
-    }
+<body class="bg-light">
     
-</ul>  *@
-@* 
-<a class="btn btn-link text-center" asp-area="" asp-controller="Event" asp-action="New"> <button> End Turn </button> </a>
-<a class="btn btn-link text-center" asp-area="" asp-controller="Event" asp-action="New"> <button> Start Game </button> </a>  *@
 
-@* Treasure Cards *@
-<div class="text-center">
-    <img style="width: 130px"  src="~/images/DominionGold.png" alt="Gold" > <h3 class="d-inline-block mr-3">30</h3>
-    <img style="width: 130px" src="~/images/DominionSilver.png" alt="Silver"> <h3 class="d-inline-block mr-3">40</h3>
-    <img style="width: 130px" src="~/images/DominionCopper.png" alt="Copper"> <h3 class="d-inline-block mr-3">60</h3>
-</div>
+    <h2 class="text-center">Your Turn @CurrentPlayer.Name</h2>
 
-@* VP Cards *@
-<div class="text-center">
-    <img style="width: 130px" src="~/images/DominionEstate.png" alt="Estate"> <h3 class="d-inline-block mr-3">8</h3>
-    <img style="width: 130px" src="~/images/DominionDuchy.png" alt="Duchy"> <h3 class="d-inline-block mr-3">8</h3>
-    <img style="width: 130px" src="~/images/DominionProvince.png" alt="Province"> <h3 class="d-inline-block mr-3">8</h3>
-</div>
+    @* To display the Tresure and VP cards name along with amount of each card left*@
+    @* <ul>
+        foreach(Card basic in CurrentPlayer.baseSet)
+        <li class="text-center">basic.Title basic.TreasureValue</li>
+    </ul> *@
 
-@* Current Player moves *@
-<div class="text-center mt-4">
-    <div class="border border-dark d-inline-block p-3">
-        <p class="mt-0 mb-0"> @CurrentPlayer.Actions, @CurrentPlayer.Buys, @CurrentPlayer.TreasureValueTotal</p>
-    </div>
-</div>
+    @* <ul>
+        @foreach(Card card in CurrentPlayer.Hand){
+            An a tag to click on to play that card
+            <a class="btn btn-link" asp-area="" asp-controller="Event" asp-action="New"> <button> card.Title </button> </a>
+            <li class="text-center">card.Title</li>
+        }
+        
+    </ul>  *@
+    @* 
+    <a class="btn btn-link text-center" asp-area="" asp-controller="Event" asp-action="New"> <button> End Turn </button> </a>
+    <a class="btn btn-link text-center" asp-area="" asp-controller="Event" asp-action="New"> <button> Start Game </button> </a>  *@
 
-
-<div class="mt-2">
-    @* Current Player deck and Discard *@
-    <div class="d-inline-block mr-5">
-        <img style="width: 130px" src="~/images/DominionBack.png" alt="Back"> 
-        <h3 class="d-inline-block mr-4">10</h3>
-        <img style="width: 130px" src="~/images/DominionBack.png" alt="Back"> 
-        <h3 class="d-inline-block">7</h3>
+    @* Treasure Cards *@
+    <div class="text-center">
+        
+            <img style="width: 130px"  src="~/images/DominionGold.png" alt="Gold" > <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Gold").ToList().Count</h3></div>
+        
+            <img style="width: 130px" src="~/images/DominionSilver.png" alt="Silver"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Silver").ToList().Count</h3></div>
+        
+            <img style="width: 130px" src="~/images/DominionCopper.png" alt="Copper"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Copper").ToList().Count</h3></div>
+        
     </div>
 
-    @* Current Player hand *@
-    <div class="text-center d-inline-block">
-        <img style="width: 130px" src="~/images/DominionEstate.png" alt="Estate"> 
-        <img style="width: 130px" src="~/images/DominionCellar.png" alt="Cellar"> 
-        <img style="width: 130px" src="~/images/DominionMine.png" alt="Mine"> 
-        <img style="width: 130px" src="~/images/DominionGold.png" alt="Gold"> 
-        <img style="width: 130px" src="~/images/DominionMarket.png" alt="Market"> 
+    @* VP Cards *@
+    <div class="text-center">
+        
+            <img style="width: 130px" src="~/images/DominionEstate.png" alt="Estate"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Estate").ToList().Count</h3></div> 
+        
+        
+            <img style="width: 130px" src="~/images/DominionDuchy.png" alt="Duchy"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Duchy").ToList().Count</h3></div>
+    
+        
+            <img style="width: 130px" src="~/images/DominionProvince.png" alt="Province"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Province").ToList().Count</h3></div>
+    
+        
+        
+        
     </div>
-</div>
 
-@* Current Player stats *@
-<div class="text-center mt-4">
-    <div class="border border-dark d-inline-block p-3">
-        <p class="mt-0 mb-0"> @CurrentPlayer.Name, @CurrentPlayer.GetVictoryPointTotal()</p>
+    @* Current Player moves *@
+    <div class="text-center mt-4">
+        <div class="border border-dark d-inline-block p-3 bg-dark rounded">
+            <p class="mt-0 mb-0 text-white"> Actions: @CurrentPlayer.Actions, Buys: @CurrentPlayer.Buys, Treasure Total: @CurrentPlayer.TreasureValueTotal</p>
+        </div>
     </div>
-</div>
+
+
+    <div class="mt-2">
+        @* Current Player deck and Discard *@
+        <div class="d-inline-block mr-5">
+            <div class="d-inline-block">
+                <p class="text-center">Discard</p>
+                <img style="width: 130px" src="~/images/DominionBack.png" alt="Back">
+                <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@CurrentPlayer.DiscardPile.Count</h3></div>
+                
+            </div>
+            
+            <div class="d-inline-block">
+                <p class="text-center">Deck</p>
+                <img style="width: 130px" src="~/images/DominionBack.png" alt="Back">
+                <div class="d-inline-block p-2 bg-danger rounded"><h3 class="mb-0">@CurrentPlayer.Deck.Count</h3></div> 
+                
+            </div>
+            
+        </div>
+
+        @* Current Player hand *@
+        <div class="text-center d-inline-block">
+            <img style="width: 130px" src="~/images/DominionEstate.png" alt="Estate"> 
+            <img style="width: 130px" src="~/images/DominionCellar.png" alt="Cellar"> 
+            <img style="width: 130px" src="~/images/DominionMine.png" alt="Mine"> 
+            <img style="width: 130px" src="~/images/DominionGold.png" alt="Gold"> 
+            <img style="width: 130px" src="~/images/DominionMarket.png" alt="Market"> 
+        </div>
+    </div>
+
+    @* Current Player stats *@
+    <div class="text-center mt-4">
+        <div class="border border-dark d-inline-block p-3 bg-dark rounded">
+            <p class="mt-0 mb-0 text-white"> Player: @CurrentPlayer.Name, VP: @CurrentPlayer.GetVictoryPointTotal()</p>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-success text-center mr-3" asp-area="" asp-controller="Event" asp-action="New">End Turn</a>
+        <a class="btn btn-danger text-center" asp-area="" asp-controller="Event" asp-action="New">End Game</a>
+    </div>
+    
+</body>
