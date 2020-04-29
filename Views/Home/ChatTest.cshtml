@@ -1,25 +1,25 @@
 @page
 <div class="container">
-    <div class="row">&nbsp;</div>
+    @* Name input*@
     <div class="row">
-        <div class="col-6">&nbsp;</div>
-        <div class="col-6">
-            User..........<input type="text" id="userInput" /> @* Name input*@
-            <br />
-            Message...<input type="text" id="messageInput" /> @* Text input*@
-            <input type="button" id="sendButton" value="Send Message" /> @* Submit button*@
-        </div>
+        <label for="userInput">User</label>
+        <input type="text" id="userInput" />
     </div>
+    @* Text input*@
     <div class="row">
-        <div class="col-12">
-            <hr />
-        </div>
+        <label for="messageInput">Message</label>
+        <input type="text" id="messageInput" />
     </div>
+    @* Submit button*@
     <div class="row">
-        <div class="col-6">&nbsp;</div>
-        <div class="col-6">
-            <ul id="messagesList"></ul> @* List of messages received from SignalR hub*@
-        </div>
+        <input type="button" id="sendButton" value="Send Message" /> 
+    </div>
+
+    <hr/>
+
+    <div class="row">
+        @* List of messages received from SignalR hub*@
+        <ul id="messagesList"></ul> 
     </div>
 </div>
 

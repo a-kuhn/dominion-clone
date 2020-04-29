@@ -55,7 +55,12 @@ namespace DominionClone.Models
 
         public void Draw()
         {
-            //removes card at idx 0 in Deck and appends to Hand
+            // If deck has no cards to draw, shuffle Discard into Deck
+            if (Deck.Count == 0)
+            {
+                Shuffle();
+            }
+            // Removes card at idx 0 in Deck and appends to Hand
             Card addToHand = Deck[0];
             Deck.RemoveAt(0);
             Hand.Add(addToHand);
