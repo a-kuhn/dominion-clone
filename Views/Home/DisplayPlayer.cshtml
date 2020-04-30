@@ -83,11 +83,12 @@
 
         @* Current Player hand *@
         <div class="text-center d-inline-block">
-            <img style="width: 130px" src="~/images/DominionEstate.png" alt="Estate"> 
-            <img style="width: 130px" src="~/images/DominionCellar.png" alt="Cellar"> 
-            <img style="width: 130px" src="~/images/DominionMine.png" alt="Mine"> 
-            <img style="width: 130px" src="~/images/DominionGold.png" alt="Gold"> 
-            <img style="width: 130px" src="~/images/DominionMarket.png" alt="Market"> 
+            @foreach (var card in CurrentPlayer.Hand)
+            {
+                <img style="width: 130px" src="~/images/Dominion@(card.Title).png" alt="@(card.Title)">
+                <h1>@CurrentPlayer.Hand.Count</h1>
+            }
+             
         </div>
     </div>
 
@@ -102,11 +103,3 @@
         <a class="btn btn-danger text-center" asp-area="" asp-controller="Event" asp-action="New">End Game</a>
     </div>
 </body>
-
-@foreach (var card in CurrentPlayer.Hand)
-{
-    <h1>@card.Title</h1>
-}
-<h1>@CurrentPlayer.Hand.Count</h1>
-<h1>@CurrentPlayer.Deck.Count</h1>
-<h1>@CurrentPlayer.DiscardPile.Count</h1>
