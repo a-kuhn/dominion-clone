@@ -17,11 +17,10 @@ namespace DominionClone.Controllers
             return View();
         }
 
-        [HttpGet("/displayBoard")]
+        [HttpGet("/game")]
         public IActionResult Game()
         {
             Game currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
-            // First Render sent from Index - if there is no game in session, initialize one
             if (currentGame == null)
             {
                 currentGame = new Game();
@@ -38,10 +37,13 @@ namespace DominionClone.Controllers
             HttpContext.Session.SetObjectAsJson("currentGame", currentGame);
 
             // if currentGame IS over, redirect to game finished screen
-            // if (currentGame.GameFinished())
-            // {
-            //     return RedirectToAction("GameComplete");
-            // }
+            if (currentGame.GameFinished())
+            {
+                Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Console.WriteLine("Game is finished");
+                Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                return RedirectToAction("GameComplete");
+            }
             // if currentGame is NOT over, keep rendering the same board with updated stats
             return View(currentGame);
         }

@@ -4,9 +4,9 @@
     Player CurrentPlayer = Model.Players[Model.PlayerTurn];
 }
 
+
 <body class="bg-secondary">
     
-
     <h2 class="text-center">Your Turn, @CurrentPlayer.Name!</h2>
 
     @* To display the Tresure and VP cards name along with amount of each card left*@
@@ -88,7 +88,6 @@
                 <img style="width: 130px" src="~/images/Dominion@(card.Title).png" alt="@(card.Title)">
                 <h1>@CurrentPlayer.Hand.Count</h1>
             }
-             
         </div>
     </div>
 
