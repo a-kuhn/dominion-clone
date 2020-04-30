@@ -114,7 +114,7 @@
     @* Command Buttons. Fix eventually to show up only when appropriate. *@
     <div>
         <form asp-controller="Home" asp-action="EndTurn" method="POST">
-            <button class="btn btn-danger">End Turn</button>
+            <button class="btn btn-warning">End Turn</button>
         </form>
     </div> 
 
@@ -126,7 +126,6 @@
     </div>
     
     <div class="d-flex justify-content-end">
-        <a class="btn btn-success text-center mr-3" asp-area="" asp-controller="Event" asp-action="New">End Turn</a>
-        <a class="btn btn-danger text-center" asp-area="" asp-controller="Event" asp-action="New">End Game</a>
+        <a class="btn btn-danger text-center" asp-controller="Home" asp-action="GameComplete">End Game</a>
     </div>
 </body>

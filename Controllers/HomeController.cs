@@ -122,7 +122,10 @@ namespace DominionClone.Controllers
             }
 
             // Switch to next player (either increment or reset to first player)
-            if (currentGame.PlayerTurn == currentGame.Players.Count - 1) {currentGame.PlayerTurn = 0;}
+            if (currentGame.PlayerTurn == currentGame.Players.Count - 1) {
+                currentGame.PlayerTurn = 0;
+                currentGame.TurnsPassed++;
+            }
             else {currentGame.PlayerTurn++;}
 
             // Next player draws 5

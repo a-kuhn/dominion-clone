@@ -1,17 +1,28 @@
 @model Game
 
-<body class="bg-secondary">
-    <h2>Game completed in @Model.TurnsPassed turns.</h2>
+@{
+    ViewData["Title"] = "Game Over!";
+}
 
-    @{
-        Player winner = Model.Players[0];
-        foreach (Player player in Model.Players)
-        {
-            if (player.GetVictoryPointTotal() > winner.GetVictoryPointTotal())
+<body class="bg-secondary">
+    <div class="text-center">
+        @{
+            Player winner = Model.Players[0];
+            foreach (Player player in Model.Players)
             {
-                winner = player;
+                if (player.GetVictoryPointTotal() > winner.GetVictoryPointTotal())
+                {
+                    winner = player;
+                }
             }
+            <h2>@winner.Name wins!</h2>
         }
-        <h2>@winner.Name is the winner!</h2>
-    }
+
+        <h2>Game completed in @Model.TurnsPassed turns.</h2>
+
+        <form asp-controller="Home" asp-action="NewGame" method="POST">
+            <button class="btn btn-success">Another Game?</button>
+        </form>
+
+    </div>
 </body>
