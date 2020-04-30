@@ -51,26 +51,13 @@ namespace DominionClone.Controllers
             if (HttpContext.Session.GetObjectFromJson<Game>("currentGame") == null)
             {
                 currentGame = new Game(NewGame:true);
+                // The first player starts with 5 cards drawn
+                currentGame.Players[currentGame.PlayerTurn].DrawFive();
             }
             else {
                 currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
             }
             return currentGame;
-        }
-
-        // For START TURN button on Player Hand (Eventually want to convert to automatic)
-        [HttpPost("/startTurn")]
-        public IActionResult StartTurn()
-        {
-            Game currentGame = GetGameFromSession();
-
-            // Draw 5
-            currentGame.Players[currentGame.PlayerTurn].DrawFive();
-
-            // Save game to session
-            HttpContext.Session.SetObjectAsJson("currentGame",currentGame);
-            
-            return RedirectToAction("Game");
         }
 
         // For PLAY buttons on Player Hand
@@ -122,7 +109,31 @@ namespace DominionClone.Controllers
             return RedirectToAction("Game");
         }
 
+        [HttpPost("/endTurn")]
+        public IActionResult EndTurn()
+        {
+            Game currentGame = GetGameFromSession();
+            Player endingPlayer = currentGame.Players[currentGame.PlayerTurn];
 
+            // Flush ending player's hand to discard
+            while (endingPlayer.Hand.Count != 0)
+            {
+                endingPlayer.Discard(0);
+            }
+
+            // Switch to next player (either increment or reset to first player)
+            if (currentGame.PlayerTurn == currentGame.Players.Count - 1) {currentGame.PlayerTurn = 0;}
+            else {currentGame.PlayerTurn++;}
+
+            // Next player draws 5
+            currentGame.Players[currentGame.PlayerTurn].DrawFive();
+
+            HttpContext.Session.SetObjectAsJson("currentGame", currentGame);
+            return RedirectToAction("Game");
+        }
+
+
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ GAME OVER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         [HttpGet("/gameComplete")]
         public IActionResult GameComplete()
         {
@@ -134,7 +145,7 @@ namespace DominionClone.Controllers
             return View(currentGame);
         }
 
-
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ OTHER STRAGGLERS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         // Page to test SignalR... delete if obsolete
         [HttpGet("/chatTest")]
         public IActionResult ChatTest()

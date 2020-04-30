@@ -111,22 +111,22 @@
         </div>
     </div>
 
+    @* Command Buttons. Fix eventually to show up only when appropriate. *@
+    <div>
+        <form asp-controller="Home" asp-action="EndTurn" method="POST">
+            <button class="btn btn-danger">End Turn</button>
+        </form>
+    </div> 
+
     @* Current Player stats *@
     <div class="text-center mt-4">
         <div class="border border-dark d-inline-block p-3 bg-dark rounded">
             <p class="mt-0 mb-0 text-white"> Player: @CurrentPlayer.Name, VP: @CurrentPlayer.GetVictoryPointTotal()</p>
         </div>
     </div>
+    
     <div class="d-flex justify-content-end">
         <a class="btn btn-success text-center mr-3" asp-area="" asp-controller="Event" asp-action="New">End Turn</a>
         <a class="btn btn-danger text-center" asp-area="" asp-controller="Event" asp-action="New">End Game</a>
     </div>
-
-
-<form asp-controller="Home" asp-action="StartTurn" method="POST">
-    <button class="btn btn-danger">Start Turn / Draw Five</button>
-</form>
-
-
-
 </body>
