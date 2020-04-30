@@ -17,36 +17,70 @@ namespace DominionClone.Controllers
             return View();
         }
 
+        // Helper Method
+        public Game GetGameFromSession()
+        {
+            Game currentGame = null;
+            if (HttpContext.Session.GetObjectFromJson<Game>("currentGame") == null)
+            {
+                currentGame = new Game(NewGame:true);
+            }
+            else {
+                currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
+            }
+            return currentGame;
+        }
+
         [HttpGet("/game")]
         public IActionResult Game()
+        {
+            Game currentGame = GetGameFromSession();
+
+            // Save game to session
+            HttpContext.Session.SetObjectAsJson("currentGame", currentGame);
+
+            // if game IS over, redirect to game finished screen
+            if (currentGame.GameFinished())
+            {
+                return RedirectToAction("GameComplete");
+            }
+            // if game is NOT over, keep rendering the same board with updated stats
+            return View(currentGame);
+        }
+
+        [HttpPost("/startTurn")]
+        public IActionResult StartTurn()
+        {
+            Game currentGame = GetGameFromSession();
+            // Draw 5
+            currentGame.Players[currentGame.PlayerTurn].DrawFive();
+
+            // Save game state in session
+            HttpContext.Session.SetObjectAsJson("currentGame",currentGame);
+            
+            return RedirectToAction("Game");
+        }
+
+
+        [HttpPost("/play")]
+        public IActionResult Play(int HandIndex)
         {
             Game currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
             if (currentGame == null)
             {
-                currentGame = new Game();
+                currentGame = new Game(NewGame:true);
             }
 
-            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            Console.WriteLine("Current Game Info");
-            Console.WriteLine("# Cards:" + currentGame.BasicCards.Count);
-            Console.WriteLine("Player 1's Hand:" + currentGame.Players[0].Hand.Count);
-            Console.WriteLine("Player 1's Deck:" + currentGame.Players[0].Deck.Count);
-            Console.WriteLine("Player 1's DiscardPile:" + currentGame.Players[0].DiscardPile.Count);
-            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            // Current turn player
+            Player turnPlayer = currentGame.Players[currentGame.PlayerTurn];
+            // player.Play(idx) removes the card from player.hand and returns it
+            Card cardToPlay = turnPlayer.Play(HandIndex);
+            // card's play method will mutate whatever player given
+            cardToPlay.Play(turnPlayer);
 
-            HttpContext.Session.SetObjectAsJson("currentGame", currentGame);
-
-
-            // if currentGame IS over, redirect to game finished screen
-            if (currentGame.GameFinished())
-            {
-                Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                Console.WriteLine("Game is finished");
-                Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                return RedirectToAction("GameComplete");
-            }
-            // if currentGame is NOT over, keep rendering the same board with updated stats
-            return View(currentGame);
+            // Save game state in session
+            HttpContext.Session.SetObjectAsJson("currentGame",currentGame);
+            return RedirectToAction("Game");
         }
 
 
@@ -98,6 +132,7 @@ namespace DominionClone.Controllers
 
     public static class SessionExtensions
     {
+        // MAKE SURE EACH HAND-MADE CLASS HAS A PARAMETER-LESS CONSTRUCTOR!!!
         public static void SetObjectAsJson(this ISession session, string key, object value)
         {
             session.SetString(key, JsonConvert.SerializeObject(value));
