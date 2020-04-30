@@ -29,7 +29,14 @@
 
     @* Treasure Cards *@
     <div class="text-center">
-            <img style="width: 130px" src="~/images/DominionCopper.png" alt="Copper"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Copper").ToList().Count</h3></div>
+            @* Coppers *@
+            <img style="width: 130px" src="~/images/DominionCopper.png" alt="Copper"> 
+            <div class="d-inline-block p-2 bg-danger rounded mr-3">
+                <h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Copper").ToList().Count</h3>
+                <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Copper" class="d-inline">
+                    <button class="btn btn-danger">Buy</button>
+                </form>
+            </div>
 
             <img style="width: 130px" src="~/images/DominionSilver.png" alt="Silver"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Silver").ToList().Count</h3></div>
 
@@ -90,10 +97,9 @@
                     <img style="width: 130px" src="~/images/Dominion@(card.Title).png" alt="@(card.Title)">
                     <form asp-controller="Home" asp-action="Play" method="POST" asp-route-hand-idx="@i">
                         <button class="btn btn-warning">Play</button>
-                    </form>
+                    </form>             @* this is always posting index 0??? *@
+                    <p>@i</p>           @* delete later *@
                 </div>
-                
-                
             }
             
         </div>

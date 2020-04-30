@@ -67,7 +67,7 @@ namespace DominionClone.Models
             DiscardPile.Add(cardFromGame);
         }
 
-        // ~~~~~~~~~~~~~~~~~~~~~~~~~ Come back - figure out where to move the removed card to. Is it discard or a temp stack on field?
+        // Move a card from Hand to Discard Pile
         public Card Play(int idxOfCardFromHand)
         {
             //remove & return chosen card from hand

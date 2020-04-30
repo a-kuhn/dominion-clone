@@ -12,25 +12,13 @@ namespace DominionClone.Controllers
 {
     public class HomeController : Controller
     {
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ INDEX ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         public IActionResult Index()
         {
             return View();
         }
 
-        // Helper Method
-        public Game GetGameFromSession()
-        {
-            Game currentGame = null;
-            if (HttpContext.Session.GetObjectFromJson<Game>("currentGame") == null)
-            {
-                currentGame = new Game(NewGame:true);
-            }
-            else {
-                currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
-            }
-            return currentGame;
-        }
-
+        // For START GAME button on Index
         [HttpPost("/newGame")]
         public IActionResult NewGame()
         {
@@ -38,6 +26,7 @@ namespace DominionClone.Controllers
             return RedirectToAction("Game");
         }
 
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ GAME ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         [HttpGet("/game")]
         public IActionResult Game()
         {
@@ -55,6 +44,21 @@ namespace DominionClone.Controllers
             return View(currentGame);
         }
 
+        // Helper Method
+        public Game GetGameFromSession()
+        {
+            Game currentGame = null;
+            if (HttpContext.Session.GetObjectFromJson<Game>("currentGame") == null)
+            {
+                currentGame = new Game(NewGame:true);
+            }
+            else {
+                currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
+            }
+            return currentGame;
+        }
+
+        // For START TURN button on Player Hand (Eventually want to convert to automatic)
         [HttpPost("/startTurn")]
         public IActionResult StartTurn()
         {
@@ -69,32 +73,32 @@ namespace DominionClone.Controllers
             return RedirectToAction("Game");
         }
 
+        // For PLAY buttons on Player Hand
         [HttpPost("/play")]
         public IActionResult Play(int HandIndex)
         {
-            Game currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
-            if (currentGame == null)
-            {
-                currentGame = new Game(NewGame:true);
-            }
+            Console.WriteLine("\n\n Received Index: " + HandIndex + "\n\n");
+
+            Game currentGame = GetGameFromSession();
 
             // Current turn player
             Player turnPlayer = currentGame.Players[currentGame.PlayerTurn];
             // player.Play(idx) removes the card from player.hand and returns it
             Card cardToPlay = turnPlayer.Play(HandIndex);
+
+            Console.WriteLine("\n\n Drawing Index: " + HandIndex + "\n\n");
+
             // card's play method will mutate whatever player given
             cardToPlay.Play(turnPlayer);
-            Console.WriteLine("\n\n\n" + cardToPlay.Title + " has " + cardToPlay.TreasureValue + "TV\n\n\n");
 
             // Save game state in session
             HttpContext.Session.SetObjectAsJson("currentGame",currentGame);
             return RedirectToAction("Game");
         }
 
-
-        // SAMPLE: Each action/purchase will be a button on the View that calls its respective method here.
-        [HttpPost("/buyCard")]
-        public IActionResult BuyCard(String cardTitleToBuy)
+        // For BUY buttons on Field Cards
+        [HttpPost("/buy")]
+        public IActionResult Buy(String cardTitle)
         {
             Game currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
 
