@@ -64,8 +64,6 @@ namespace DominionClone.Controllers
         [HttpPost("/play")]
         public IActionResult Play(int HandIndex)
         {
-            Console.WriteLine("\n\n Received Index: " + HandIndex + "\n\n");
-
             Game currentGame = GetGameFromSession();
 
             // Current turn player
@@ -73,9 +71,7 @@ namespace DominionClone.Controllers
             // player.Play(idx) removes the card from player.hand and returns it
             Card cardToPlay = turnPlayer.Play(HandIndex);
 
-            Console.WriteLine("\n\n Drawing Index: " + HandIndex + "\n\n");
-
-            // card's play method will mutate whatever player given
+            // card's play method will mutate whatever player
             cardToPlay.Play(turnPlayer);
 
             // Save game state in session
@@ -136,6 +132,9 @@ namespace DominionClone.Controllers
         {
             Game currentGame = GetGameFromSession();
             Player endingPlayer = currentGame.Players[currentGame.PlayerTurn];
+
+            // Flush ending player's InPlay stack to discard
+            endingPlayer.Flush();
 
             // Flush ending player's hand to discard
             while (endingPlayer.Hand.Count != 0)

@@ -9,24 +9,6 @@
     
     <h2 class="text-center">Your Turn, @CurrentPlayer.Name!</h2>
 
-    @* To display the Tresure and VP cards name along with amount of each card left*@
-    @* <ul>
-        foreach(Card basic in CurrentPlayer.baseSet)
-        <li class="text-center">basic.Title basic.TreasureValue</li>
-    </ul> *@
-
-    @* <ul>
-        @foreach(Card card in CurrentPlayer.Hand){
-            An a tag to click on to play that card
-            <a class="btn btn-link" asp-area="" asp-controller="Event" asp-action="New"> <button> card.Title </button> </a>
-            <li class="text-center">card.Title</li>
-        }
-        
-    </ul>  *@
-    @* 
-    <a class="btn btn-link text-center" asp-area="" asp-controller="Event" asp-action="New"> <button> End Turn </button> </a>
-    <a class="btn btn-link text-center" asp-area="" asp-controller="Event" asp-action="New"> <button> Start Game </button> </a>  *@
-
     @* Treasure Cards *@
     <div class="text-center">
             @* Coppers *@
@@ -69,6 +51,17 @@
         </div>
     </div>
 
+    @* Current Player InPlay *@
+    <div class="text-center d-inline-block">
+        <h3>@CurrentPlayer.InPlay.Count Cards played this turn</h3>
+        @for (int i = 0; i < CurrentPlayer.InPlay.Count; i++)
+        {
+            Card card = CurrentPlayer.InPlay[i];
+            <div class="d-inline-block">
+                <img style="width: 130px" src="~/images/Dominion@(card.Title).png" alt="@(card.Title)">
+            </div>
+        }
+    </div>
 
     <div class="mt-4 row">
         @* Current Player deck and Discard *@
@@ -102,7 +95,6 @@
                     </form>
                 </div>
             }
-            
         </div>
     </div>
 

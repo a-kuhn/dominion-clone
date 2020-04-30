@@ -17,6 +17,7 @@ namespace DominionClone.Models
         public List<Card> Hand { get; set; }
         public List<Card> Deck { get; set; }
         public List<Card> DiscardPile { get; set; }
+        public List<Card> InPlay { get; set; }
 
         /*
             Each turn, the Player has # Actions they can take, # Times they can Buy, and the total Treasure Value they could spend
@@ -32,6 +33,7 @@ namespace DominionClone.Models
             Hand = new List<Card>();
             Deck = new List<Card>();
             DiscardPile = new List<Card>();
+            InPlay = new List<Card>();
             Actions = 1;
             Buys = 1;
             TreasureValueTotal = 0;
@@ -76,8 +78,21 @@ namespace DominionClone.Models
             //remove & return chosen card from hand
             Card cardToPlay = Hand[idxOfCardFromHand];
             Hand.RemoveAt(idxOfCardFromHand);
-            DiscardPile.Add(cardToPlay);
+                                                // DiscardPile.Add(cardToPlay);
+            InPlay.Add(cardToPlay);
             return cardToPlay;
+        }
+
+        // Move all cards in InPlay to DiscardPile (To be called end of each turn)
+        public void Flush()
+        {
+            while (InPlay.Count > 0)
+            {
+                Card cardToFlush = InPlay[0];
+                InPlay.RemoveAt(0);
+                DiscardPile.Add(cardToFlush);
+            }
+            return;
         }
 
         // Move a card from Hand to Trash
