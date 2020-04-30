@@ -84,6 +84,7 @@ namespace DominionClone.Models
                 Card cardToDeal = BasicCards.FirstOrDefault(c=>c.Title == "Copper");
                 if (cardToDeal != null)
                 {
+                    BasicCards.Remove(cardToDeal);
                     player.Deck.Add(cardToDeal);
                 }
                 else 
@@ -97,6 +98,7 @@ namespace DominionClone.Models
                 Card cardToDeal = BasicCards.FirstOrDefault(c=>c.Title == "Estate");
                 if (cardToDeal != null)
                 {
+                    BasicCards.Remove(cardToDeal);
                     player.Deck.Add(cardToDeal);
                 }
                 else 

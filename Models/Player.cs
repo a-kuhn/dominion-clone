@@ -30,12 +30,6 @@ namespace DominionClone.Models
             Name = name;
             Hand = new List<Card>();
             Deck = new List<Card>();
-            // It makes more sense to initialize the Game Field with (for example) 60 Copper, THEN deal out 7 copper to each player?
-            // Used to be below: 
-            // {
-            //     new Copper(),new Copper(),new Copper(),new Copper(),new Copper(),new Copper(),new Copper(),new Estate(),new Estate(),new Estate()
-            // }; 
-            // please feel free to revert
             DiscardPile = new List<Card>();
             Actions = 1;
             Buys = 1;
@@ -54,6 +48,16 @@ namespace DominionClone.Models
             Card addToHand = Deck[0];
             Deck.RemoveAt(0);
             Hand.Add(addToHand);
+        }
+
+        // Draws 5 times, to be used at the beginning of each turn
+        public void DrawFive()
+        {
+            Draw();
+            Draw();
+            Draw();
+            Draw();
+            Draw();
         }
 
         // Given a Card (from field), Add to Discard

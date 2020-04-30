@@ -103,10 +103,23 @@
     </div>
 </body>
 
-@foreach (var card in CurrentPlayer.Hand)
+
+<form asp-controller="Home" asp-action="StartTurn" method="POST">
+    <button class="btn btn-link">Start Turn / Draw Five</button>
+</form>
+<a href="/startTurn">GET</a>
+
+@for (int i = 0; i < CurrentPlayer.Hand.Count; i++)
 {
-    <h1>@card.Title</h1>
+    Card card = CurrentPlayer.Hand[i];
+    <div>
+        <h1>@card.Title</h1>
+        <form asp-controller="Home" asp-action="Play" method="POST" asp-route-hand-idx="@i">
+            <button class="btn btn-link">Play</button>
+        </form>
+    </div>
 }
+
 <h1>@CurrentPlayer.Hand.Count</h1>
 <h1>@CurrentPlayer.Deck.Count</h1>
 <h1>@CurrentPlayer.DiscardPile.Count</h1>

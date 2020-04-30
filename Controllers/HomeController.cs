@@ -20,21 +20,48 @@ namespace DominionClone.Controllers
         [HttpGet("/game")]
         public IActionResult Game()
         {
-            Game currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
-            if (currentGame == null)
+            Game currentGame = null;
+            if (HttpContext.Session.GetObjectFromJson<Game>("currentGame") == null)
             {
+                Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Console.WriteLine("There was no game in session");
+                Console.WriteLine("There was no game in session");
+                Console.WriteLine("There was no game in session");
+                Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 currentGame = new Game();
             }
+            else {
+                Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Console.WriteLine("Found a game in session");
+                Console.WriteLine("Found a game in session");
+                Console.WriteLine("Found a game in session");
+                Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
 
-            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            Console.WriteLine("Current Game Info");
-            Console.WriteLine("# Cards:" + currentGame.BasicCards.Count);
-            Console.WriteLine("Player 1's Hand:" + currentGame.Players[0].Hand.Count);
-            Console.WriteLine("Player 1's Deck:" + currentGame.Players[0].Deck.Count);
-            Console.WriteLine("Player 1's DiscardPile:" + currentGame.Players[0].DiscardPile.Count);
-            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                // for some reason, the game pulled out of session will have double # cards???
+            }
             
+            // Save game state in session
             HttpContext.Session.SetObjectAsJson("currentGame",currentGame);
+
+
+            /*
+                    TESTING SESSION
+            */
+            String test = "begin Game() method";
+            if (HttpContext.Session.GetString("sessionTest") == null)
+            {
+                test = "session was empty";
+            }
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            Console.WriteLine("Game method");
+            Console.WriteLine(test);
+            Console.WriteLine(test);
+            Console.WriteLine(test);
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+            HttpContext.Session.SetString("sessionTest",test);
+
 
             // if currentGame IS over, redirect to game finished screen
             if (currentGame.GameFinished())
@@ -48,6 +75,81 @@ namespace DominionClone.Controllers
             return View(currentGame);
         }
 
+
+        [HttpGet("/startTurn")]
+        public IActionResult StartTurn()
+        {
+            Game currentGame = null;
+            if (HttpContext.Session.GetObjectFromJson<Game>("currentGame") == null)
+            {
+                currentGame = new Game();
+            }
+            else {
+                currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
+            }
+
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            Console.WriteLine("StartTurn: drawing 5");
+            Console.WriteLine("Before:");
+            Console.WriteLine("Hand has this many: "+ currentGame.Players[currentGame.PlayerTurn].Hand.Count);
+            Console.WriteLine("Deck has this many: "+ currentGame.Players[currentGame.PlayerTurn].Deck.Count);
+            
+            // Draw 5
+            currentGame.Players[currentGame.PlayerTurn].DrawFive();
+
+            Console.WriteLine("After:");
+            Console.WriteLine("Hand has this many: "+ currentGame.Players[currentGame.PlayerTurn].Hand.Count);
+            Console.WriteLine("Deck has this many: "+ currentGame.Players[currentGame.PlayerTurn].Deck.Count);
+            
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            // Save game state in session
+            HttpContext.Session.SetObjectAsJson("currentGame",currentGame);
+
+
+            /*
+                    TESTING SESSION
+            */
+            String test = "begin startTurn() method";
+            if (HttpContext.Session.GetString("sessionTest") == null)
+            {
+                test = "session was empty";
+            }
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            Console.WriteLine("startTurn method");
+            Console.WriteLine(test);
+            Console.WriteLine(test);
+            Console.WriteLine(test);
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+            test = "after print";
+            HttpContext.Session.SetString("sessionTest",test);
+
+
+
+            return RedirectToAction("Game");
+        }
+
+
+        [HttpPost("/play")]
+        public IActionResult Play(int HandIndex)
+        {
+            Game currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
+            if (currentGame == null)
+            {
+                currentGame = new Game();
+            }
+            
+            // Current turn player
+            Player turnPlayer = currentGame.Players[currentGame.PlayerTurn];
+            // player.Play(idx) removes the card from player.hand and returns it
+            Card cardToPlay = turnPlayer.Play(HandIndex);
+            // card's play method will mutate whatever player given
+            cardToPlay.Play(turnPlayer);
+
+            // Save game state in session
+            HttpContext.Session.SetObjectAsJson("currentGame",currentGame);
+            return RedirectToAction("Game");
+        }
 
         // SAMPLE: Each action/purchase will be a button on the View that calls its respective method here.
         [HttpPost("/buyCard")]
