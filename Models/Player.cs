@@ -49,7 +49,7 @@ namespace DominionClone.Models
             Deck.RemoveAt(0);
             Hand.Add(addToHand);
         }
-        
+
         // Draws 5 times, to be used at the beginning of each turn
         public void DrawFive()
         {
@@ -90,13 +90,13 @@ namespace DominionClone.Models
         {
             //move all cards from discard to deck
             //randomly move cards around
-            Deck = DiscardPile;
+            Deck.AddRange(DiscardPile);
             DiscardPile = new List<Card>();
             Random rand = new Random();
             Card temp;
             for (int i = 0; i < rand.Next(70, 300); i++)
             {
-                int shuffleSpot = rand.Next(0, 13);
+                int shuffleSpot = rand.Next(0, Deck.Count);
                 temp = Deck[shuffleSpot];
                 Deck.RemoveAt(shuffleSpot);
                 Deck.Add(temp);

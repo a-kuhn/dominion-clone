@@ -52,10 +52,11 @@ namespace DominionClone.Controllers
         public IActionResult StartTurn()
         {
             Game currentGame = GetGameFromSession();
+
             // Draw 5
             currentGame.Players[currentGame.PlayerTurn].DrawFive();
 
-            // Save game state in session
+            // Save game to session
             HttpContext.Session.SetObjectAsJson("currentGame",currentGame);
             
             return RedirectToAction("Game");

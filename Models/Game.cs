@@ -110,6 +110,9 @@ namespace DominionClone.Models
                 }
             }
 
+            // Need to shuffle the starting deck
+            player.Shuffle();
+
             return;
         }
             
