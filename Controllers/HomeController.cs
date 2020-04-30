@@ -28,7 +28,7 @@ namespace DominionClone.Controllers
                 Console.WriteLine("There was no game in session");
                 Console.WriteLine("There was no game in session");
                 Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                currentGame = new Game();
+                currentGame = new Game(NewGame:true);
             }
             else {
                 Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -82,7 +82,7 @@ namespace DominionClone.Controllers
             Game currentGame = null;
             if (HttpContext.Session.GetObjectFromJson<Game>("currentGame") == null)
             {
-                currentGame = new Game();
+                currentGame = new Game(NewGame:true);
             }
             else {
                 currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
@@ -136,7 +136,7 @@ namespace DominionClone.Controllers
             Game currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
             if (currentGame == null)
             {
-                currentGame = new Game();
+                currentGame = new Game(NewGame:true);
             }
             
             // Current turn player
@@ -199,6 +199,7 @@ namespace DominionClone.Controllers
 
     public static class SessionExtensions
     {
+        // MAKE SURE EACH CLASS HAS A PARAMETER-LESS CONSTRUCTOR!!!
         public static void SetObjectAsJson(this ISession session, string key, object value)
         {
             session.SetString(key, JsonConvert.SerializeObject(value));
