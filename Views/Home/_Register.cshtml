@@ -1,0 +1,45 @@
+@model User
+
+<form asp-controller="Home" asp-action="Register" method="POST">
+  <fieldset class="border p-2">
+    <legend class="w-auto">Register</legend>
+<div class="form-group">
+    <label asp-for="Name"></label>
+    <span
+      class="text-danger font-weight-bold"
+      asp-validation-for="Name"
+    ></span>
+    <input asp-for="Name" class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label asp-for="Email"></label>
+    <span
+      class="text-danger font-weight-bold"
+      asp-validation-for="Email"
+    ></span>
+    <input asp-for="Email" class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label asp-for="Password"></label>
+    <span
+      class="text-danger font-weight-bold"
+      asp-validation-for="Password"
+    ></span>
+    <input asp-for="Password" class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label asp-for="PWConfirm"></label>
+    <span
+      class="text-danger font-weight-bold"
+      asp-validation-for="PWConfirm"
+    ></span>
+    <input asp-for="PWConfirm" class="form-control" />
+  </div>
+
+  <button class="btn btn-success">Register</button>
+  </fieldset>
+  
+</form>
