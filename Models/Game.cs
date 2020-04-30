@@ -103,6 +103,7 @@ namespace DominionClone.Models
                 {
                     BasicCards.Remove(cardToDeal);
                     player.Deck.Add(cardToDeal);
+                    player.TotalVP += cardToDeal.VPValue;
                 }
                 else 
                 {
