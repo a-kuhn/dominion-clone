@@ -30,12 +30,6 @@ namespace DominionClone.Models
             Name = name;
             Hand = new List<Card>();
             Deck = new List<Card>();
-            // It makes more sense to initialize the Game Field with (for example) 60 Copper, THEN deal out 7 copper to each player?
-            // Used to be below: 
-            // {
-            //     new Copper(),new Copper(),new Copper(),new Copper(),new Copper(),new Copper(),new Copper(),new Estate(),new Estate(),new Estate()
-            // }; 
-            // please feel free to revert
             DiscardPile = new List<Card>();
             Actions = 1;
             Buys = 1;
@@ -56,19 +50,32 @@ namespace DominionClone.Models
             Hand.Add(addToHand);
         }
 
+        // Draws 5 times, to be used at the beginning of each turn
+        public void DrawFive()
+        {
+            Draw();
+            Draw();
+            Draw();
+            Draw();
+            Draw();
+        }
+
         // Given a Card (from field), Add to Discard
         public void Buy(Card cardFromGame)
         {
             //appends new card to discard pile
             DiscardPile.Add(cardFromGame);
+            TreasureValueTotal -= cardFromGame.Cost;
+            Buys--;
         }
 
-        // ~~~~~~~~~~~~~~~~~~~~~~~~~ Come back - figure out where to move the removed card to. Is it discard or a temp stack on field?
+        // Move a card from Hand to Discard Pile
         public Card Play(int idxOfCardFromHand)
         {
             //remove & return chosen card from hand
             Card cardToPlay = Hand[idxOfCardFromHand];
             Hand.RemoveAt(idxOfCardFromHand);
+            DiscardPile.Add(cardToPlay);
             return cardToPlay;
         }
 
@@ -86,13 +93,13 @@ namespace DominionClone.Models
         {
             //move all cards from discard to deck
             //randomly move cards around
-            Deck = DiscardPile;
+            Deck.AddRange(DiscardPile);
             DiscardPile = new List<Card>();
             Random rand = new Random();
             Card temp;
             for (int i = 0; i < rand.Next(70, 300); i++)
             {
-                int shuffleSpot = rand.Next(0, 13);
+                int shuffleSpot = rand.Next(0, Deck.Count);
                 temp = Deck[shuffleSpot];
                 Deck.RemoveAt(shuffleSpot);
                 Deck.Add(temp);

@@ -27,11 +27,14 @@ namespace DominionClone.Models
         public int TurnsPassed { get; set; }
         // -> Down the road, we could turn this into a more comprehensive log of turns and actions!
         
+         // Parameterless Constructor for when it's built coming out of Json.Deserialize()        
+        public Game()
+        {}
 
 
         
         // Constructor: 
-        public Game()
+        public Game(bool NewGame = true)
         {
             // Build the starting field cards and trash.
             BasicCards = BuildBasicCards();
@@ -84,6 +87,7 @@ namespace DominionClone.Models
                 Card cardToDeal = BasicCards.FirstOrDefault(c=>c.Title == "Copper");
                 if (cardToDeal != null)
                 {
+                    BasicCards.Remove(cardToDeal);
                     player.Deck.Add(cardToDeal);
                 }
                 else 
@@ -97,6 +101,7 @@ namespace DominionClone.Models
                 Card cardToDeal = BasicCards.FirstOrDefault(c=>c.Title == "Estate");
                 if (cardToDeal != null)
                 {
+                    BasicCards.Remove(cardToDeal);
                     player.Deck.Add(cardToDeal);
                 }
                 else 
@@ -104,6 +109,9 @@ namespace DominionClone.Models
                     // panic
                 }
             }
+
+            // Need to shuffle the starting deck
+            player.Shuffle();
 
             return;
         }

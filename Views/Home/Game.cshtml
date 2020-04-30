@@ -29,7 +29,14 @@
 
     @* Treasure Cards *@
     <div class="text-center">
-            <img style="width: 130px" src="~/images/DominionCopper.png" alt="Copper"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Copper").ToList().Count</h3></div>
+            @* Coppers *@
+            <img style="width: 130px" src="~/images/DominionCopper.png" alt="Copper"> 
+            <div class="d-inline-block p-2 bg-danger rounded mr-3">
+                <h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Copper").ToList().Count</h3>
+                <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Copper" class="d-inline">
+                    <button class="btn btn-danger">Buy</button>
+                </form>
+            </div>
 
             <img style="width: 130px" src="~/images/DominionSilver.png" alt="Silver"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Silver").ToList().Count</h3></div>
 
@@ -42,14 +49,16 @@
         
             <img style="width: 130px" src="~/images/DominionEstate.png" alt="Estate"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Estate").ToList().Count</h3></div> 
         
-        
             <img style="width: 130px" src="~/images/DominionDuchy.png" alt="Duchy"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Duchy").ToList().Count</h3></div>
     
-        
-            <img style="width: 130px" src="~/images/DominionProvince.png" alt="Province"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Province").ToList().Count</h3></div>
-    
-        
-        
+            @* Provinces *@
+            <img style="width: 130px" src="~/images/DominionProvince.png" alt="Province"> 
+            <div class="d-inline-block p-2 bg-danger rounded mr-3">
+                <h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Province").ToList().Count</h3>
+                <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Province" class="d-inline">
+                    <button class="btn btn-danger">Buy</button>
+                </form>
+            </div>
         
     </div>
 
@@ -88,16 +97,24 @@
                 Card card = CurrentPlayer.Hand[i];
                 <div class="d-inline-block">
                     <img style="width: 130px" src="~/images/Dominion@(card.Title).png" alt="@(card.Title)">
-                    <form asp-controller="Home" asp-action="Play" method="POST" asp-route-hand-idx="@i">
-                        <button class="btn btn-link">Play</button>
+                    <form asp-controller="Home" asp-action="Play" method="POST" asp-route-HandIndex=@i>
+                        <button class="btn btn-warning">Play</button>
                     </form>
                 </div>
-                
-                
             }
             
         </div>
     </div>
+
+    @* Command Buttons. Fix eventually to show up only when appropriate. *@
+    <div>
+        <form asp-controller="Home" asp-action="PlayAllTreasures" method="POST">
+            <button class="btn btn-warning">Play All Treasures</button>
+        </form>
+        <form asp-controller="Home" asp-action="EndTurn" method="POST">
+            <button class="btn btn-warning">End Turn</button>
+        </form>
+    </div> 
 
     @* Current Player stats *@
     <div class="text-center mt-4">
@@ -105,9 +122,8 @@
             <p class="mt-0 mb-0 text-white"> Player: @CurrentPlayer.Name, VP: @CurrentPlayer.GetVictoryPointTotal()</p>
         </div>
     </div>
+    
     <div class="d-flex justify-content-end">
-        <a class="btn btn-success text-center mr-3" asp-area="" asp-controller="Event" asp-action="New">End Turn</a>
-        <a class="btn btn-danger text-center" asp-area="" asp-controller="Event" asp-action="New">End Game</a>
+        <a class="btn btn-danger text-center" asp-controller="Home" asp-action="GameComplete">End Game</a>
     </div>
-
 </body>
