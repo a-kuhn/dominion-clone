@@ -97,10 +97,9 @@
                 Card card = CurrentPlayer.Hand[i];
                 <div class="d-inline-block">
                     <img style="width: 130px" src="~/images/Dominion@(card.Title).png" alt="@(card.Title)">
-                    <form asp-controller="Home" asp-action="Play" method="POST" asp-route-hand-idx="@i">
+                    <form asp-controller="Home" asp-action="Play" method="POST" asp-route-HandIndex=@i>
                         <button class="btn btn-warning">Play</button>
-                    </form>             @* this is always posting index 0??? *@
-                    <p>@i</p>           @* delete later *@
+                    </form>
                 </div>
             }
             
