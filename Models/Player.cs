@@ -66,6 +66,7 @@ namespace DominionClone.Models
             //appends new card to discard pile
             DiscardPile.Add(cardFromGame);
             TreasureValueTotal -= cardFromGame.Cost;
+            Buys--;
         }
 
         // Move a card from Hand to Discard Pile
