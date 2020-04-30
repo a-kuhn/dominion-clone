@@ -83,6 +83,7 @@ namespace DominionClone.Controllers
             return RedirectToAction("Game");
         }
 
+        // For PLAY ALL TREASURES button on Player Hand
         [HttpPost("/playAllTreasures")]
         public IActionResult PlayAllTreasures()
         {
@@ -93,7 +94,9 @@ namespace DominionClone.Controllers
             {
                 if (turnPlayer.Hand[i].Type == "Treasure")
                 {
-                    Console.WriteLine("\n\n We should play this " + turnPlayer.Hand[i].Title + " at idx " + i);
+                    Card cardToPlay = turnPlayer.Play(i);
+                    cardToPlay.Play(turnPlayer);
+                    i--;
                 }
             }
 
@@ -101,7 +104,6 @@ namespace DominionClone.Controllers
             HttpContext.Session.SetObjectAsJson("currentGame",currentGame);
             return RedirectToAction("Game");
         }
-
 
         // For BUY buttons on Field Cards
         //                *** ONLY WORKS FOR BASIC CARDS RIGHT NOW *** 
