@@ -36,6 +36,7 @@ namespace DominionClone.Controllers
 
             HttpContext.Session.SetObjectAsJson("currentGame", currentGame);
 
+
             // if currentGame IS over, redirect to game finished screen
             if (currentGame.GameFinished())
             {
