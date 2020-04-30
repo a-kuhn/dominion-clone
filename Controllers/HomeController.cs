@@ -150,6 +150,10 @@ namespace DominionClone.Controllers
             }
             else {currentGame.PlayerTurn++;}
 
+            // Next player's stats for the turn resets
+            currentGame.Players[currentGame.PlayerTurn].Actions = 1;
+            currentGame.Players[currentGame.PlayerTurn].Buys = 1;
+            currentGame.Players[currentGame.PlayerTurn].TreasureValueTotal = 0;
             // Next player draws 5
             currentGame.Players[currentGame.PlayerTurn].DrawFive();
 
