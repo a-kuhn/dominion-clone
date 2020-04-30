@@ -109,6 +109,9 @@
 
     @* Command Buttons. Fix eventually to show up only when appropriate. *@
     <div>
+        <form asp-controller="Home" asp-action="PlayAllTreasures" method="POST">
+            <button class="btn btn-warning">Play All Treasures</button>
+        </form>
         <form asp-controller="Home" asp-action="EndTurn" method="POST">
             <button class="btn btn-warning">End Turn</button>
         </form>

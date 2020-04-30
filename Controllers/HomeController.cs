@@ -83,6 +83,26 @@ namespace DominionClone.Controllers
             return RedirectToAction("Game");
         }
 
+        [HttpPost("/playAllTreasures")]
+        public IActionResult PlayAllTreasures()
+        {
+            Game currentGame = GetGameFromSession();
+            Player turnPlayer = currentGame.Players[currentGame.PlayerTurn];
+
+            for (int i = 0; i < turnPlayer.Hand.Count; i++)
+            {
+                if (turnPlayer.Hand[i].Type == "Treasure")
+                {
+                    Console.WriteLine("\n\n We should play this " + turnPlayer.Hand[i].Title + " at idx " + i);
+                }
+            }
+
+            // Save game state in session
+            HttpContext.Session.SetObjectAsJson("currentGame",currentGame);
+            return RedirectToAction("Game");
+        }
+
+
         // For BUY buttons on Field Cards
         //                *** ONLY WORKS FOR BASIC CARDS RIGHT NOW *** 
         [HttpPost("/buy")]
