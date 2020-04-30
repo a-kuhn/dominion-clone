@@ -10,7 +10,7 @@
             Player winner = Model.Players[0];
             foreach (Player player in Model.Players)
             {
-                if (player.GetVictoryPointTotal() > winner.GetVictoryPointTotal())
+                if (player.TotalVP > winner.TotalVP)
                 {
                     winner = player;
                 }

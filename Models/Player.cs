@@ -12,7 +12,13 @@ namespace DominionClone.Models
         public string Name { get; set; }
 
         /* 
-            Player's Cards will be in 1 of 3 stacks: Hand, Deck, or DiscardPile.
+            Player with most VP in their Deck at end of game is the winner
+            this prop is modified when .Buy() is called and the new card.Type == "Victory"
+        */
+        public int TotalVP { get; set; }
+
+        /* 
+            Player's Cards will be in 1 of 4 stacks: Hand, Deck, InPlay, or DiscardPile.
         */
         public List<Card> Hand { get; set; }
         public List<Card> Deck { get; set; }
@@ -30,6 +36,7 @@ namespace DominionClone.Models
         public Player(string name)
         {
             Name = name;
+            TotalVP = 0; //or should this be set to 3 because starting deck includes 3 estates?
             Hand = new List<Card>();
             Deck = new List<Card>();
             DiscardPile = new List<Card>();
@@ -70,6 +77,10 @@ namespace DominionClone.Models
             DiscardPile.Add(cardFromGame);
             TreasureValueTotal -= cardFromGame.Cost;
             Buys--;
+            if(cardFromGame.Type == "Victory")
+            {
+                TotalVP += cardFromGame.VPValue;
+            }
         }
 
         // Move a card from Hand to Discard Pile
@@ -78,7 +89,7 @@ namespace DominionClone.Models
             //remove & return chosen card from hand
             Card cardToPlay = Hand[idxOfCardFromHand];
             Hand.RemoveAt(idxOfCardFromHand);
-                                                // DiscardPile.Add(cardToPlay);
+            // DiscardPile.Add(cardToPlay);
             InPlay.Add(cardToPlay);
             return cardToPlay;
         }
@@ -132,32 +143,33 @@ namespace DominionClone.Models
         }
 
         // Helper for GameComplete view: Calculate total VP of this player
-        public int GetVictoryPointTotal()
-        {
-            int total_vp = 0;
-            foreach (Card card in Hand)
-            {
-                if (card.Type == "Victory")
-                {
-                    total_vp += card.VPValue;
-                }
-            }
-            foreach (Card card in Deck)
-            {
-                if (card.Type == "Victory")
-                {
-                    total_vp += card.VPValue;
-                }
-            }
-            foreach (Card card in DiscardPile)
-            {
-                if (card.Type == "Victory")
-                {
-                    total_vp += card.VPValue;
-                }
-            }
-            return total_vp;
-        }
+        //!replaced with TotalVP prop & check for card type in .Buy()
+        // public int GetVictoryPointTotal()
+        // {
+        //     int total_vp = 0;
+        //     foreach (Card card in Hand)
+        //     {
+        //         if (card.Type == "Victory")
+        //         {
+        //             total_vp += card.VPValue;
+        //         }
+        //     }
+        //     foreach (Card card in Deck)
+        //     {
+        //         if (card.Type == "Victory")
+        //         {
+        //             total_vp += card.VPValue;
+        //         }
+        //     }
+        //     foreach (Card card in DiscardPile)
+        //     {
+        //         if (card.Type == "Victory")
+        //         {
+        //             total_vp += card.VPValue;
+        //         }
+        //     }
+        //     return total_vp;
+        // }
 
 
 
