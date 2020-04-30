@@ -69,7 +69,6 @@ namespace DominionClone.Controllers
             return RedirectToAction("Game");
         }
 
-
         [HttpPost("/play")]
         public IActionResult Play(int HandIndex)
         {
@@ -85,6 +84,7 @@ namespace DominionClone.Controllers
             Card cardToPlay = turnPlayer.Play(HandIndex);
             // card's play method will mutate whatever player given
             cardToPlay.Play(turnPlayer);
+            Console.WriteLine("\n\n\n" + cardToPlay.Title + " has " + cardToPlay.TreasureValue + "TV\n\n\n");
 
             // Save game state in session
             HttpContext.Session.SetObjectAsJson("currentGame",currentGame);

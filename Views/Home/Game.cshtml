@@ -89,7 +89,7 @@
                 <div class="d-inline-block">
                     <img style="width: 130px" src="~/images/Dominion@(card.Title).png" alt="@(card.Title)">
                     <form asp-controller="Home" asp-action="Play" method="POST" asp-route-hand-idx="@i">
-                        <button class="btn btn-link">Play</button>
+                        <button class="btn btn-warning">Play</button>
                     </form>
                 </div>
                 
@@ -112,7 +112,7 @@
 
 
 <form asp-controller="Home" asp-action="StartTurn" method="POST">
-    <button class="btn btn-link">Start Turn / Draw Five</button>
+    <button class="btn btn-danger">Start Turn / Draw Five</button>
 </form>
 
 

@@ -15,13 +15,13 @@ namespace DominionClone.Models
         public int VPValue { get; set; }
         public int TreasureValue { get; set; }
 
-        public Card(string type, string title, int cost)
+        public Card(string type, string title, int cost, int vPValue = 0, int treasureValue = 0)
         {
             Type = type;
             Title = title;
             Cost = cost;
-            VPValue = 0;
-            TreasureValue = 0;
+            VPValue = vPValue;
+            TreasureValue = treasureValue;
         }
 
         public virtual void Play(Player player)
