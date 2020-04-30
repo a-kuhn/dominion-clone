@@ -33,8 +33,8 @@ namespace DominionClone.Controllers
             Console.WriteLine("Player 1's Deck:" + currentGame.Players[0].Deck.Count);
             Console.WriteLine("Player 1's DiscardPile:" + currentGame.Players[0].DiscardPile.Count);
             Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            
-            HttpContext.Session.SetObjectAsJson("currentGame",currentGame);
+
+            HttpContext.Session.SetObjectAsJson("currentGame", currentGame);
 
             // if currentGame IS over, redirect to game finished screen
             if (currentGame.GameFinished())
@@ -54,12 +54,12 @@ namespace DominionClone.Controllers
         public IActionResult BuyCard(String cardTitleToBuy)
         {
             Game currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
-            
+
             // Find the first card with given title on the Game Field
             // Add it to Player's Discard
             // Remove it from field
 
-            HttpContext.Session.SetObjectAsJson("currentGame",currentGame);
+            HttpContext.Session.SetObjectAsJson("currentGame", currentGame);
             return RedirectToAction("DisplayPlayer");
         }
 
