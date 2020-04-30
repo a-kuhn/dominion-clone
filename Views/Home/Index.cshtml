@@ -6,7 +6,9 @@
     <div class="text-center">
         <img src="~/images/DominionTitle.png" alt="Title">
         <div class="mt-3">
-            <a href="/game" class="btn btn-success ">START A GAME</a>
+            <form asp-controller="Home" asp-action="NewGame" method="POST">
+                <button class="btn btn-success">START A GAME</button>
+            </form>
         </div>
     </div>
 </body>

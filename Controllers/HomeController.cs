@@ -31,6 +31,13 @@ namespace DominionClone.Controllers
             return currentGame;
         }
 
+        [HttpPost("/newGame")]
+        public IActionResult NewGame()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Game");
+        }
+
         [HttpGet("/game")]
         public IActionResult Game()
         {

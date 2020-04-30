@@ -73,6 +73,7 @@ namespace DominionClone.Models
             //remove & return chosen card from hand
             Card cardToPlay = Hand[idxOfCardFromHand];
             Hand.RemoveAt(idxOfCardFromHand);
+            DiscardPile.Add(cardToPlay);
             return cardToPlay;
         }
 
