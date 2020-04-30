@@ -29,12 +29,11 @@
 
     @* Treasure Cards *@
     <div class="text-center">
-        
-            <img style="width: 130px"  src="~/images/DominionGold.png" alt="Gold" > <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Gold").ToList().Count</h3></div>
-        
-            <img style="width: 130px" src="~/images/DominionSilver.png" alt="Silver"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Silver").ToList().Count</h3></div>
-        
             <img style="width: 130px" src="~/images/DominionCopper.png" alt="Copper"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Copper").ToList().Count</h3></div>
+
+            <img style="width: 130px" src="~/images/DominionSilver.png" alt="Silver"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Silver").ToList().Count</h3></div>
+
+            <img style="width: 130px"  src="~/images/DominionGold.png" alt="Gold" > <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Gold").ToList().Count</h3></div>
         
     </div>
 
