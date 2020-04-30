@@ -47,22 +47,18 @@
     @* VP Cards *@
     <div class="text-center">
         
-            <img style="width: 130px" src="~/images/DominionEstate.png" alt="Estate"> 
-            <div class="d-inline-block p-2 bg-danger rounded mr-3">
-                <h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Estate").ToList().Count</h3>
-                <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Estate" class="d-inline">
-                    <button class="btn btn-danger">Buy</button>
-                </form>
-            </div> 
-        
+            <img style="width: 130px" src="~/images/DominionEstate.png" alt="Estate"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Estate").ToList().Count</h3></div> 
         
             <img style="width: 130px" src="~/images/DominionDuchy.png" alt="Duchy"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Duchy").ToList().Count</h3></div>
     
-        
-            <img style="width: 130px" src="~/images/DominionProvince.png" alt="Province"> <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Province").ToList().Count</h3></div>
-    
-        
-        
+            @* Provinces *@
+            <img style="width: 130px" src="~/images/DominionProvince.png" alt="Province"> 
+            <div class="d-inline-block p-2 bg-danger rounded mr-3">
+                <h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Province").ToList().Count</h3>
+                <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Province" class="d-inline">
+                    <button class="btn btn-danger">Buy</button>
+                </form>
+            </div>
         
     </div>
 
