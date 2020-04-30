@@ -112,35 +112,14 @@ namespace DominionClone.Models
         public bool GameFinished()
         {
             /*
-                CONDITION #1: All Providences are removed from field
+                CONDITION #1: All Provinces are removed from field
             */
-            // Slower method: Loop over all cards on field and count Providences
-            int providenceCount = 0;
-            foreach (Card card in BasicCards)
-            {
-                if (card.Title == "Providence")
-                {
-                    providenceCount++;
-                }
-            }
-            if (providenceCount == 0)
+            // Faster method: If there are no more Providences, LINQ returns null, so we use that as the condition
+            Card firstProvince = BasicCards.FirstOrDefault(c=>c.Title == "Province");
+            if (firstProvince == null) 
             {
                 return true;
             }
-            
-            // Faster method: If there are no more Providences, LINQ returns null, so we use that as the condition
-            // Card firstProvidence = BasicCards.FirstOrDefault(c=>c.Title == "Providence");
-            // if (firstProvidence == null) 
-            // {
-            //     Console.WriteLine("NO MORE PROVINCES");
-            //     Console.WriteLine("NO MORE PROVINCES");
-            //     Console.WriteLine("NO MORE PROVINCES");
-            //     Console.WriteLine("NO MORE PROVINCES");
-            //     Console.WriteLine("NO MORE PROVINCES");
-            //     Console.WriteLine("NO MORE PROVINCES");
-            //     Console.WriteLine("NO MORE PROVINCES");
-            //     return true;
-            // }
 
             /* 
                 Condition #2: 3 Kinds of any card are removed from field
