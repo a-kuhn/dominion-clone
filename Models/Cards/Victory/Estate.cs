@@ -7,6 +7,6 @@ namespace DominionClone.Models
 {
     public class Estate : Card
     {
-        public Estate(string type = "Victory", string title = "Estate", int cost = 2, int vpValue = 1) : base(type, title, cost) { }
+        public Estate(string type = "Victory", string title = "Estate", int cost = 2, int vPValue = 1, int treasureValue = 0) : base(type, title, cost, vPValue, treasureValue) { }
     }
 }

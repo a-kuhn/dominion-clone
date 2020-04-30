@@ -97,17 +97,29 @@ namespace DominionClone.Controllers
         }
 
         // For BUY buttons on Field Cards
+        //                *** ONLY WORKS FOR BASIC CARDS RIGHT NOW *** 
         [HttpPost("/buy")]
         public IActionResult Buy(String cardTitle)
         {
-            Game currentGame = HttpContext.Session.GetObjectFromJson<Game>("currentGame");
+            Console.WriteLine("\n\n I want to buy a: " + cardTitle + "\n\n");
+
+            Game currentGame = GetGameFromSession();
+            Player turnPlayer = currentGame.Players[currentGame.PlayerTurn];
 
             // Find the first card with given title on the Game Field
-            // Add it to Player's Discard
-            // Remove it from field
+            Card cardToBuy = currentGame.BasicCards.FirstOrDefault(c=>c.Title == cardTitle);
+            if (cardToBuy != null)
+            {
+                // Move it from Field to Player's Discard
+                currentGame.BasicCards.Remove(cardToBuy);
+                turnPlayer.Buy(cardToBuy);
+            }
+            else {
+                // panic (button should be hidden in the View when not applicable anyways!)
+            }
 
             HttpContext.Session.SetObjectAsJson("currentGame", currentGame);
-            return RedirectToAction("DisplayPlayer");
+            return RedirectToAction("Game");
         }
 
 
