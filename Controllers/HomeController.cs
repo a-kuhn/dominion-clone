@@ -71,8 +71,40 @@ namespace DominionClone.Controllers
             // player.Play(idx) removes the card from player.hand and returns it
             Card cardToPlay = turnPlayer.Play(HandIndex);
 
-            // card's play method will mutate whatever player
-            cardToPlay.Play(turnPlayer);
+            if(cardToPlay.Type == "Action")
+            {
+                if (cardToPlay.Title == "Village")
+                {
+                    turnPlayer.Draw();
+                    turnPlayer.Actions += 2;
+                }
+                else if (cardToPlay.Title == "Smithy")
+                {
+                    turnPlayer.Draw();
+                    turnPlayer.Draw();
+                    turnPlayer.Draw();
+                }
+                else if (cardToPlay.Title == "Festival")
+                {
+                    turnPlayer.TreasureValueTotal += 2;
+                    turnPlayer.Actions ++;
+                    turnPlayer.Buys++;
+                }
+                else if (cardToPlay.Title == "Market")
+                {
+                    turnPlayer.Draw();
+                    turnPlayer.TreasureValueTotal ++;
+                    turnPlayer.Actions ++;
+                    turnPlayer.Buys++;
+                }
+
+                turnPlayer.Actions--;
+            }
+            // if it's a treasure card
+            else
+            {
+                cardToPlay.Play(turnPlayer);
+            }
 
             // Save game state in session
             HttpContext.Session.SetObjectAsJson("currentGame",currentGame);
@@ -102,26 +134,44 @@ namespace DominionClone.Controllers
         }
 
         // For BUY buttons on Field Cards
-        //                *** ONLY WORKS FOR BASIC CARDS RIGHT NOW *** 
         [HttpPost("/buy")]
-        public IActionResult Buy(String cardTitle)
+        public IActionResult Buy(String cardTitle, String cardType)
         {
             Console.WriteLine("\n\n I want to buy a: " + cardTitle + "\n\n");
 
             Game currentGame = GetGameFromSession();
             Player turnPlayer = currentGame.Players[currentGame.PlayerTurn];
 
-            // Find the first card with given title on the Game Field
-            Card cardToBuy = currentGame.BasicCards.FirstOrDefault(c=>c.Title == cardTitle);
-            if (cardToBuy != null)
+            if (cardType == "Treasure" || cardType == "Victory")
             {
-                // Move it from Field to Player's Discard
-                currentGame.BasicCards.Remove(cardToBuy);
-                turnPlayer.Buy(cardToBuy);
+                // Find the first card with given title on the Game Field
+                Card cardToBuy = currentGame.BasicCards.FirstOrDefault(c=>c.Title == cardTitle);
+                if (cardToBuy != null)
+                {
+                    // Move it from Field to Player's Discard
+                    currentGame.BasicCards.Remove(cardToBuy);
+                    turnPlayer.Buy(cardToBuy);
+                }
+                else {
+                    // panic (button should be hidden in the View when not applicable anyways!)
+                }
             }
-            else {
-                // panic (button should be hidden in the View when not applicable anyways!)
+            else
+            {
+                // Find the first card with given title on the Game Field
+                Card cardToBuy = currentGame.KingdomCards.FirstOrDefault(c=>c.Title == cardTitle);
+                if (cardToBuy != null)
+                {
+                    // Move it from Field to Player's Discard
+                    currentGame.KingdomCards.Remove(cardToBuy);
+                    turnPlayer.Buy(cardToBuy);
+                }
+                else {
+                    // panic (button should be hidden in the View when not applicable anyways!)
+                }
             }
+
+            
 
             HttpContext.Session.SetObjectAsJson("currentGame", currentGame);
             return RedirectToAction("Game");
