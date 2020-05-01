@@ -37,116 +37,206 @@
             @* Treasure & Victory Cards *@
             <div class="row">
                 @* Coppers *@
-                <img style="width: 100px" src="~/images/DominionCopper.png" alt="Copper"> 
-                <div class="d-inline-block p-2 bg-danger rounded mr-3">
-                    <h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Copper").ToList().Count</h3>
-                    @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Copper").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Copper").ToList().Count > 0){
-                        <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Copper" asp-route-cardType="Treasure" class="d-inline">
-                            <button class="btn btn-warning">Buy</button>
-                        </form>
-                    }            
+                <div class="mr-3">
+                    @* Count *@
+                    <div>
+                        <h3 class="mb-0">(@Model.BasicCards.Where(c => c.Title == "Copper").ToList().Count Left)</h3>
+                    </div>
+                    @* Image *@
+                    <div>
+                        <img style="width: 130px" src="~/images/DominionCopper.png" alt="Copper"> 
+                    </div>
+                    @* Buy Button *@
+                    <div>
+                        @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Copper").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Copper").ToList().Count > 0){
+                            <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Copper" asp-route-cardType="Action" class="d-inline">
+                                <button class="btn btn-warning">Buy</button>
+                            </form>
+                        }    
+                    </div>
                 </div>
 
                 @* Silvers *@
-                <img style="width: 100px" src="~/images/DominionSilver.png" alt="Silver"> 
-                <div class="d-inline-block p-2 bg-danger rounded mr-3">
-                    <h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Silver").ToList().Count</h3>
-                    @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Silver").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Silver").ToList().Count > 0){
-                        <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Silver" asp-route-cardType="Treasure" class="d-inline">
-                            <button class="btn btn-warning">Buy</button>
-                        </form>
-                    }
+                <div class="mr-3">
+                    @* Count *@
+                    <div>
+                        <h3 class="mb-0">(@Model.BasicCards.Where(c => c.Title == "Silver").ToList().Count Left)</h3>
+                    </div>
+                    @* Image *@
+                    <div>
+                        <img style="width: 130px" src="~/images/DominionSilver.png" alt="Silver"> 
+                    </div>
+                    @* Buy Button *@
+                    <div>
+                        @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Silver").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Silver").ToList().Count > 0){
+                            <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Silver" asp-route-cardType="Action" class="d-inline">
+                                <button class="btn btn-warning">Buy</button>
+                            </form>
+                        }    
+                    </div>
                 </div>
 
                 @* Golds *@
-                <img style="width: 100px"  src="~/images/DominionGold.png" alt="Gold" > 
-                <div class="d-inline-block p-2 bg-danger rounded mr-3">
-                    <h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Gold").ToList().Count</h3>
-                    @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Gold").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Gold").ToList().Count > 0){
-                        <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Gold" asp-route-cardType="Treasure" class="d-inline">
-                            <button class="btn btn-warning">Buy</button>
-                        </form>
-                    }
+                <div class="mr-3">
+                    @* Count *@
+                    <div>
+                        <h3 class="mb-0">(@Model.BasicCards.Where(c => c.Title == "Gold").ToList().Count Left)</h3>
+                    </div>
+                    @* Image *@
+                    <div>
+                        <img style="width: 130px" src="~/images/DominionGold.png" alt="Gold"> 
+                    </div>
+                    @* Buy Button *@
+                    <div>
+                        @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Gold").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Gold").ToList().Count > 0){
+                            <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Gold" asp-route-cardType="Action" class="d-inline">
+                                <button class="btn btn-warning">Buy</button>
+                            </form>
+                        }    
+                    </div>
                 </div>
 
                 @* Estates *@
-                <img style="width: 100px" src="~/images/DominionEstate.png" alt="Estate"> 
-                <div class="d-inline-block p-2 bg-danger rounded mr-3">
-                    <h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Estate").ToList().Count</h3>
-                    @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Estate").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Estate").ToList().Count > 0){
-                        <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Estate" asp-route-cardType="Victory" class="d-inline">
-                            <button class="btn btn-warning">Buy</button>
-                        </form>
-                    }
-                </div> 
+                <div class="mr-3">
+                    @* Count *@
+                    <div>
+                        <h3 class="mb-0">(@Model.BasicCards.Where(c => c.Title == "Estate").ToList().Count Left)</h3>
+                    </div>
+                    @* Image *@
+                    <div>
+                        <img style="width: 130px" src="~/images/DominionEstate.png" alt="Estate"> 
+                    </div>
+                    @* Buy Button *@
+                    <div>
+                        @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Estate").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Estate").ToList().Count > 0){
+                            <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Estate" asp-route-cardType="Action" class="d-inline">
+                                <button class="btn btn-warning">Buy</button>
+                            </form>
+                        }    
+                    </div>
+                </div>
 
                 @* Duchys *@
-                <img style="width: 100px" src="~/images/DominionDuchy.png" alt="Duchy"> 
-                <div class="d-inline-block p-2 bg-danger rounded mr-3">
-                    <h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Duchy").ToList().Count</h3>
-                    @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Duchy").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Duchy").ToList().Count > 0){
-                        <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Duchy" asp-route-cardType="Victory" class="d-inline">
-                            <button class="btn btn-warning">Buy</button>
-                        </form>
-                    }
+                <div class="mr-3">
+                    @* Count *@
+                    <div>
+                        <h3 class="mb-0">(@Model.BasicCards.Where(c => c.Title == "Duchy").ToList().Count Left)</h3>
+                    </div>
+                    @* Image *@
+                    <div>
+                        <img style="width: 130px" src="~/images/DominionDuchy.png" alt="Duchy"> 
+                    </div>
+                    @* Buy Button *@
+                    <div>
+                        @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Duchy").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Duchy").ToList().Count > 0){
+                            <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Duchy" asp-route-cardType="Action" class="d-inline">
+                                <button class="btn btn-warning">Buy</button>
+                            </form>
+                        }    
+                    </div>
                 </div>
 
                 @* Provinces *@
-                <img style="width: 100px" src="~/images/DominionProvince.png" alt="Province"> 
-                <div class="d-inline-block p-2 bg-danger rounded mr-3">
-                    <h3 class="mb-0">@Model.BasicCards.Where(c => c.Title == "Province").ToList().Count</h3>
-                    @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Province").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Province").ToList().Count > 0){
-                        <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Province" asp-route-cardType="Victory" class="d-inline">
-                            <button class="btn btn-warning">Buy</button>
-                        </form>
-                    }
+                <div class="mr-3">
+                    @* Count *@
+                    <div>
+                        <h3 class="mb-0">(@Model.BasicCards.Where(c => c.Title == "Province").ToList().Count Left)</h3>
+                    </div>
+                    @* Image *@
+                    <div>
+                        <img style="width: 130px" src="~/images/DominionProvince.png" alt="Province"> 
+                    </div>
+                    @* Buy Button *@
+                    <div>
+                        @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Province").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Province").ToList().Count > 0){
+                            <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Province" asp-route-cardType="Action" class="d-inline">
+                                <button class="btn btn-warning">Buy</button>
+                            </form>
+                        }    
+                    </div>
                 </div>
             </div>
             
             @* Action Cards *@
             <div class="row">
                 @* Village *@
-                <img style="width: 100px" src="~/images/DominionVillage.png" alt="Village"> 
-                <div class="d-inline-block p-2 bg-danger rounded mr-3">
-                    <h3 class="mb-0">@Model.KingdomCards.Where(c => c.Title == "Village").ToList().Count</h3>
-                    @if(CurrentPlayer.TreasureValueTotal >= Model.KingdomCards.FirstOrDefault(c => c.Title == "Village").Cost && CurrentPlayer.Buys > 0 && Model.KingdomCards.Where(c => c.Title == "Village").ToList().Count > 0){
-                        <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Village" asp-route-cardType="Action" class="d-inline">
-                            <button class="btn btn-warning">Buy</button>
-                        </form>
-                    }            
+                <div class="mr-3">
+                    @* Count *@
+                    <div>
+                        <h3 class="mb-0">(@Model.KingdomCards.Where(c => c.Title == "Village").ToList().Count Left)</h3>
+                    </div>
+                    @* Image *@
+                    <div>
+                        <img style="width: 130px" src="~/images/DominionVillage.png" alt="Village"> 
+                    </div>
+                    @* Buy Button *@
+                    <div>
+                        @if(CurrentPlayer.TreasureValueTotal >= Model.KingdomCards.FirstOrDefault(c => c.Title == "Village").Cost && CurrentPlayer.Buys > 0 && Model.KingdomCards.Where(c => c.Title == "Village").ToList().Count > 0){
+                            <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Village" asp-route-cardType="Action" class="d-inline">
+                                <button class="btn btn-warning">Buy</button>
+                            </form>
+                        }    
+                    </div>
                 </div>
 
                 @* Smithy *@
-                <img style="width: 100px" src="~/images/DominionSmithy.png" alt="Smithy"> 
-                <div class="d-inline-block p-2 bg-danger rounded mr-3">
-                    <h3 class="mb-0">@Model.KingdomCards.Where(c => c.Title == "Smithy").ToList().Count</h3>
-                    @if(CurrentPlayer.TreasureValueTotal >= Model.KingdomCards.FirstOrDefault(c => c.Title == "Smithy").Cost && CurrentPlayer.Buys > 0 && Model.KingdomCards.Where(c => c.Title == "Smithy").ToList().Count > 0){
-                        <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Smithy" asp-route-cardType="Action" class="d-inline">
-                            <button class="btn btn-warning">Buy</button>
-                        </form>
-                    }            
+                <div class="mr-3">
+                    @* Count *@
+                    <div>
+                        <h3 class="mb-0">(@Model.KingdomCards.Where(c => c.Title == "Smithy").ToList().Count Left)</h3>
+                    </div>
+                    @* Image *@
+                    <div>
+                        <img style="width: 130px" src="~/images/DominionSmithy.png" alt="Smithy"> 
+                    </div>
+                    @* Buy Button *@
+                    <div>
+                        @if(CurrentPlayer.TreasureValueTotal >= Model.KingdomCards.FirstOrDefault(c => c.Title == "Smithy").Cost && CurrentPlayer.Buys > 0 && Model.KingdomCards.Where(c => c.Title == "Smithy").ToList().Count > 0){
+                            <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Smithy" asp-route-cardType="Action" class="d-inline">
+                                <button class="btn btn-warning">Buy</button>
+                            </form>
+                        }    
+                    </div>
                 </div>
 
                 @* Festival *@
-                <img style="width: 100px" src="~/images/DominionFestival.png" alt="Festival"> 
-                <div class="d-inline-block p-2 bg-danger rounded mr-3">
-                    <h3 class="mb-0">@Model.KingdomCards.Where(c => c.Title == "Festival").ToList().Count</h3>
-                    @if(CurrentPlayer.TreasureValueTotal >= Model.KingdomCards.FirstOrDefault(c => c.Title == "Festival").Cost && CurrentPlayer.Buys > 0 && Model.KingdomCards.Where(c => c.Title == "Festival").ToList().Count > 0){
-                        <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Festival" asp-route-cardType="Action" class="d-inline">
-                            <button class="btn btn-warning">Buy</button>
-                        </form>
-                    }            
+                <div class="mr-3">
+                    @* Count *@
+                    <div>
+                        <h3 class="mb-0">(@Model.KingdomCards.Where(c => c.Title == "Festival").ToList().Count Left)</h3>
+                    </div>
+                    @* Image *@
+                    <div>
+                        <img style="width: 130px" src="~/images/DominionFestival.png" alt="Festival"> 
+                    </div>
+                    @* Buy Button *@
+                    <div>
+                        @if(CurrentPlayer.TreasureValueTotal >= Model.KingdomCards.FirstOrDefault(c => c.Title == "Festival").Cost && CurrentPlayer.Buys > 0 && Model.KingdomCards.Where(c => c.Title == "Festival").ToList().Count > 0){
+                            <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Festival" asp-route-cardType="Action" class="d-inline">
+                                <button class="btn btn-warning">Buy</button>
+                            </form>
+                        }    
+                    </div>
                 </div>
 
                 @* Market *@
-                <img style="width: 100px" src="~/images/DominionMarket.png" alt="Market"> 
-                <div class="d-inline-block p-2 bg-danger rounded mr-3">
-                    <h3 class="mb-0">@Model.KingdomCards.Where(c => c.Title == "Market").ToList().Count</h3>
-                    @if(CurrentPlayer.TreasureValueTotal >= Model.KingdomCards.FirstOrDefault(c => c.Title == "Market").Cost && CurrentPlayer.Buys > 0 && Model.KingdomCards.Where(c => c.Title == "Market").ToList().Count > 0){
-                        <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Market" asp-route-cardType="Action" class="d-inline">
-                            <button class="btn btn-warning">Buy</button>
-                        </form>
-                    }            
+                <div class="mr-3">
+                    @* Count *@
+                    <div>
+                        <h3 class="mb-0">(@Model.KingdomCards.Where(c => c.Title == "Market").ToList().Count Left)</h3>
+                    </div>
+                    @* Image *@
+                    <div>
+                        <img style="width: 130px" src="~/images/DominionMarket.png" alt="Market"> 
+                    </div>
+                    @* Buy Button *@
+                    <div>
+                        @if(CurrentPlayer.TreasureValueTotal >= Model.KingdomCards.FirstOrDefault(c => c.Title == "Market").Cost && CurrentPlayer.Buys > 0 && Model.KingdomCards.Where(c => c.Title == "Market").ToList().Count > 0){
+                            <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Market" asp-route-cardType="Action" class="d-inline">
+                                <button class="btn btn-warning">Buy</button>
+                            </form>
+                        }    
+                    </div>
                 </div>
 
             </div>
