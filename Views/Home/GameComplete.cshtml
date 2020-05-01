@@ -26,8 +26,8 @@
         </form>
 
     </div>
-    <table class="table table-striped mt-4">
-  <thead>
+    <table class="table table-bordered table-light mt-4">
+  <thead class="thead-dark">
     <tr>
       <th scope="col">Player</th>
       <th scope="col">VP</th>
@@ -37,13 +37,14 @@
       <th scope="col">Estate</th>
       <th scope="col">Duchy</th>
       <th scope="col">Province</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
     <tbody>
         @foreach(Player player in Model.Players){
             var CombinedCards = player.Hand.Concat(player.Deck).Concat(player.DiscardPile).Concat(player.InPlay).ToList();
 
-            <tr>
+            <tr class="table-active">
                 <td>@player.Name</td>
                 <td>@player.TotalVP</td>
                 <td>@CombinedCards.Where(c=>c.Title == "Copper").ToList().Count</td>
@@ -52,6 +53,7 @@
                 <td>@CombinedCards.Where(c=>c.Title == "Estate").ToList().Count</td>
                 <td>@CombinedCards.Where(c=>c.Title == "Duchy").ToList().Count</td>
                 <td>@CombinedCards.Where(c=>c.Title == "Province").ToList().Count</td>
+                <td>@CombinedCards.Where(c=>c.Type == "Action").ToList().Count</td>
             </tr>
         }
     </tbody>
