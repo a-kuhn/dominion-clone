@@ -193,20 +193,20 @@
             @for (int i = 0; i < CurrentPlayer.Hand.Count; i++)
             {
                 Card card = CurrentPlayer.Hand[i];
-                <div class="d-inline-block align-top">
-                    <img style="width: 100px" src="~/images/Dominion@(card.Title).png" alt="@(card.Title)">
-                    @if(card.Type == "Treasure"){
+                @if(card.Type == "Victory")
+                {
+                    <div class="d-inline-block align-top">
+                        <img style="width: 100px" src="~/images/Dominion@(card.Title).png" alt="@(card.Title)">
+                    </div>
+                }
+                else
+                {
+                    <div class="d-inline-block align-top">
                         <form asp-controller="Home" asp-action="Play" method="POST" asp-route-HandIndex=@i>
-                            <button class="btn btn-warning">Play</button>
+                            <button class="card-glow"><img style="width: 100px" src="~/images/Dominion@(card.Title).png" alt="@(card.Title)"></button>
                         </form>
-                    }
-                    @if(card.Type == "Action" && @CurrentPlayer.Actions>0){
-                        <form asp-controller="Home" asp-action="Play" method="POST" asp-route-HandIndex=@i>
-                            <button class="btn btn-warning">Play</button>
-                        </form>
-                    }
-
-                </div>
+                    </div>
+                }
             }
         </div>
     </div>
