@@ -39,12 +39,10 @@
             </div>
         </nav>
     </header> *@
-    <div class="container">
-        @* <partial name="_CookieConsentPartial" /> *@
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    @* <partial name="_CookieConsentPartial" /> *@
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
 
 
     <environment include="Development">
@@ -70,8 +68,8 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
-=======
-﻿<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
