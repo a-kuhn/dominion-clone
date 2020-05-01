@@ -12,7 +12,7 @@ namespace DominionClone.Models
         public List<Card> BasicCards { get; set; } 
         
         // All Action Cards on the Field live in this list. Starts with 10 sets each of 10 types.
-        // public List<Card> KingdomCards { get; set; }
+        public List<Card> KingdomCards { get; set; }
         
         // All Cards in the Trash Pile
         public List<Card> Trash { get; set; }
@@ -31,14 +31,12 @@ namespace DominionClone.Models
         public Game()
         {}
 
-
-        
         // Constructor: 
         public Game(bool NewGame = true)
         {
             // Build the starting field cards and trash.
             BasicCards = BuildBasicCards();
-            // KingdomCards = BuildKingdomCards();
+            KingdomCards = BuildKingdomCards();
             Trash = new List<Card>();
             
             // Game starts with first player's turn and on Turn #1
@@ -74,6 +72,19 @@ namespace DominionClone.Models
             for (int i = 0; i < 8; i++){baseSet.Add(new Estate());}
             for (int i = 0; i < 8; i++){baseSet.Add(new Duchy());}
             for (int i = 0; i < 8; i++){baseSet.Add(new Province());}
+            return baseSet;
+        }
+
+        // Helper Method for the Constructor to initialize the beginning set of cards
+            // For now: 10 of each Festival, Market, Smithy, Village
+            // LATER GOAL: add 10 of each for 10 action cards picked for the game
+        public List<Card> BuildKingdomCards()
+        {
+            List<Card> baseSet = new List<Card>();
+            for (int i = 0; i < 10; i++){baseSet.Add(new Festival());}
+            for (int i = 0; i < 10; i++){baseSet.Add(new Market());}
+            for (int i = 0; i < 10; i++){baseSet.Add(new Smithy());}
+            for (int i = 0; i < 10; i++){baseSet.Add(new Village());}
             return baseSet;
         }
 
@@ -169,3 +180,6 @@ namespace DominionClone.Models
         }
     }
 }
+
+
+// add Kingdom Cards to be checked in GameFinished()
