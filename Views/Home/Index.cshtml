@@ -1,14 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Welcome!";
 }
-
-
-<body class="bg-secondary">
-    <div class="text-center">
-        <img src="~/images/DominionTitle.png" alt="Title">
-        <div class="mt-3">
+<body class="bg-dark">
+    <div class="d-flex mt-5 align-items-center justify-content-center box-cover-bg">
+        <div class="div-glow">
             <form asp-controller="Home" asp-action="NewGame" method="POST">
-                <button class="btn btn-success">START A GAME</button>
+                <button class="btn start-game-btn p-3">START A GAME</button>
             </form>
         </div>
     </div>
