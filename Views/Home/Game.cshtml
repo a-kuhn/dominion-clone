@@ -168,27 +168,23 @@
     @* Player Cards *@
     <div class="row mt-4 ml-5">
         @* Discard and Deck*@
-        <div class="mr-5">
+        <div class="col-md-2">
             <div class="d-inline-block">
-                <h3 class="text-center">Discard</h3>
+                <h3 class="text-center">Discard (@CurrentPlayer.DiscardPile.Count)</h3>
 
                 @if(CPDiscardPile.Count > 0){
                     <img style="width: 100px" src="~/images/Dominion@(CPDiscardPile[CPDiscardPile.Count-1].Title).png" alt="Back">
                 }
                 else{
                     <div style="width: 100px; height: 150px" class="border border-dark d-inline-block align-middle"></div>
-                }
-                <div class="d-inline-block p-2 bg-danger rounded mr-3"><h3 class="mb-0">@CurrentPlayer.DiscardPile.Count</h3></div>
-                
+                }   
             </div>
-            
+        </div>
+        <div class="col-md-1 mr-5">
             <div class="d-inline-block">
-                <h3 class="text-center">Deck</h3>
-                <img style="width: 100px" src="~/images/DominionBack.png" alt="Back">
-                <div class="d-inline-block p-2 bg-danger rounded"><h3 class="mb-0">@CurrentPlayer.Deck.Count</h3></div> 
-                
+                <h3 class="text-center">Deck (@CurrentPlayer.Deck.Count)</h3>
+                <img style="width: 100px" src="~/images/DominionBack.png" alt="Back">                
             </div>
-            
         </div>
 
         @* Current Player hand *@

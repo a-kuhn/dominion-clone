@@ -64,6 +64,8 @@ namespace DominionClone.Models
             for (int i = 0; i < 60; i++)
             {
                 Copper Copper = new Copper();
+                // Could also ignore the Copper model and make a new Card instead
+                //Card newCopper = new Card(type:"Treasure", title:"Copper", cost:0, vPValue:0, treasureValue:1);
                 baseSet.Add(Copper);
             }
             // The rest is the same for different cards and # copies, so converted the rest to shorthand!!
