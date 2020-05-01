@@ -6,6 +6,14 @@
   /* blur size and spread size are optional (they default to 0) */
 }
 
+.card-glow {
+  display: inline-block;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px 5px rgb(172, 237, 253);
+  /* in order: x offset, y offset, blur size, spread size, color */
+  /* blur size and spread size are optional (they default to 0) */
+}
+
 .outline {
   outline: 1px solid greenyellow;
 }
