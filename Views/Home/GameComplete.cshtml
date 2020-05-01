@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Game Over!";
+    
 }
 
 <body class="bg-secondary">
@@ -25,4 +26,34 @@
         </form>
 
     </div>
+    <table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th scope="col">Player</th>
+      <th scope="col">VP</th>
+      <th scope="col">Copper</th>
+      <th scope="col">Silver</th>
+      <th scope="col">Gold</th>
+      <th scope="col">Estate</th>
+      <th scope="col">Duchy</th>
+      <th scope="col">Province</th>
+    </tr>
+  </thead>
+    <tbody>
+        @foreach(Player player in Model.Players){
+            var CombinedCards = player.Hand.Concat(player.Deck).Concat(player.DiscardPile).Concat(player.InPlay).ToList();
+
+            <tr>
+                <td>@player.Name</td>
+                <td>@player.TotalVP</td>
+                <td>@CombinedCards.Where(c=>c.Title == "Copper").ToList().Count</td>
+                <td>@CombinedCards.Where(c=>c.Title == "Silver").ToList().Count</td>
+                <td>@CombinedCards.Where(c=>c.Title == "Gold").ToList().Count</td>
+                <td>@CombinedCards.Where(c=>c.Title == "Estate").ToList().Count</td>
+                <td>@CombinedCards.Where(c=>c.Title == "Duchy").ToList().Count</td>
+                <td>@CombinedCards.Where(c=>c.Title == "Province").ToList().Count</td>
+            </tr>
+        }
+    </tbody>
+</table>
 </body>
