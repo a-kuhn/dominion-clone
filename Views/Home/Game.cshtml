@@ -283,7 +283,7 @@
             @for (int i = 0; i < CurrentPlayer.Hand.Count; i++)
             {
                 Card card = CurrentPlayer.Hand[i];
-                @if(card.Type == "Victory")
+                @if(card.Type == "Victory" || (card.Type == "Action" && CurrentPlayer.Actions == 0))
                 {
                     <div class="d-inline-block align-top">
                         <img style="width: 100px" src="~/images/Dominion@(card.Title).png" alt="@(card.Title)">
