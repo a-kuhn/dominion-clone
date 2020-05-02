@@ -143,37 +143,5 @@ namespace DominionClone.Models
             Hand.RemoveAt(idxOfCardToDiscard);
             DiscardPile.Add(cardToDiscard);
         }
-
-        // Helper for GameComplete view: Calculate total VP of this player
-        //!replaced with TotalVP prop & check for card type in .Buy()
-        // public int GetVictoryPointTotal()
-        // {
-        //     int total_vp = 0;
-        //     foreach (Card card in Hand)
-        //     {
-        //         if (card.Type == "Victory")
-        //         {
-        //             total_vp += card.VPValue;
-        //         }
-        //     }
-        //     foreach (Card card in Deck)
-        //     {
-        //         if (card.Type == "Victory")
-        //         {
-        //             total_vp += card.VPValue;
-        //         }
-        //     }
-        //     foreach (Card card in DiscardPile)
-        //     {
-        //         if (card.Type == "Victory")
-        //         {
-        //             total_vp += card.VPValue;
-        //         }
-        //     }
-        //     return total_vp;
-        // }
-
-
-
     }
 }
