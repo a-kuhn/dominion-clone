@@ -275,16 +275,29 @@
         </div>
     </div>
 
-    @* Player Cards *@
+    @* Player Discard, Deck, and Hand *@
     <div class="row mt-4 ml-5">
         <partial name="_PlayerCardsPartial" />
     </div>
 
-    @* Command Buttons. Fix eventually to show up only when appropriate. *@
+    @* Command Buttons *@
     <div class="row mt-4 ml-5">
-        <form asp-controller="Home" asp-action="PlayAllTreasures" method="POST">
-            <button class="btn btn-warning mx-3">Play All Treasures</button>
-        </form>
+        @{
+            int TreasureCardCount = 0;
+            foreach (var Card in CurrentPlayer.Hand)
+            {
+                if (Card.Type == "Treasure")
+                {
+                    TreasureCardCount++;
+                }
+            }
+            if (TreasureCardCount > 0)
+            {
+                <form asp-controller="Home" asp-action="PlayAllTreasures" method="POST">
+                    <button class="btn btn-warning mx-3">Play All Treasures</button>
+                </form>
+            }
+        }
         <form asp-controller="Home" asp-action="EndTurn" method="POST">
             <button class="btn btn-warning">End Turn</button>
         </form>
