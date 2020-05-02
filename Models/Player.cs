@@ -126,7 +126,7 @@ namespace DominionClone.Models
             Card temp;
             for (int i = 0; i < rand.Next(70, 300); i++)
             {
-                int shuffleSpot = rand.Next(0, Deck.Count);
+                int shuffleSpot = rand.Next(0, Deck.Count-1);
                 temp = Deck[shuffleSpot];
                 Deck.RemoveAt(shuffleSpot);
                 Deck.Add(temp);
