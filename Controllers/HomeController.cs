@@ -27,6 +27,7 @@ namespace DominionClone.Controllers
         }
 
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ GAME ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // Renders Main Game view
         [HttpGet("/game")]
         public IActionResult Game()
         {
@@ -50,6 +51,7 @@ namespace DominionClone.Controllers
             Game currentGame = null;
             if (HttpContext.Session.GetObjectFromJson<Game>("currentGame") == null)
             {
+                // Create new Game
                 currentGame = new Game(NewGame:true);
                 // The first player starts with 5 cards drawn
                 currentGame.Players[currentGame.PlayerTurn].DrawFive();
@@ -65,12 +67,12 @@ namespace DominionClone.Controllers
         public IActionResult Play(int HandIndex)
         {
             Game currentGame = GetGameFromSession();
-
-            // Current turn player
             Player turnPlayer = currentGame.Players[currentGame.PlayerTurn];
+
             // player.Play(idx) removes the card from player.hand and returns it
             Card cardToPlay = turnPlayer.Play(HandIndex);
 
+// R E F A C T O R???
             if(cardToPlay.Type == "Action")
             {
                 if (cardToPlay.Title == "Village")
@@ -100,13 +102,12 @@ namespace DominionClone.Controllers
 
                 turnPlayer.Actions--;
             }
-            // if it's a treasure card
+            // Treasure Cards
             else
             {
                 cardToPlay.Play(turnPlayer);
             }
 
-            // Save game state in session
             HttpContext.Session.SetObjectAsJson("currentGame",currentGame);
             return RedirectToAction("Game");
         }
@@ -118,6 +119,7 @@ namespace DominionClone.Controllers
             Game currentGame = GetGameFromSession();
             Player turnPlayer = currentGame.Players[currentGame.PlayerTurn];
 
+            // Find every Treasure card in hand and play it to field
             for (int i = 0; i < turnPlayer.Hand.Count; i++)
             {
                 if (turnPlayer.Hand[i].Type == "Treasure")
@@ -137,11 +139,10 @@ namespace DominionClone.Controllers
         [HttpPost("/buy")]
         public IActionResult Buy(String cardTitle, String cardType)
         {
-            Console.WriteLine("\n\n I want to buy a: " + cardTitle + "\n\n");
-
             Game currentGame = GetGameFromSession();
             Player turnPlayer = currentGame.Players[currentGame.PlayerTurn];
 
+            // Look in the BasicCards list
             if (cardType == "Treasure" || cardType == "Victory")
             {
                 // Find the first card with given title on the Game Field
@@ -152,10 +153,10 @@ namespace DominionClone.Controllers
                     currentGame.BasicCards.Remove(cardToBuy);
                     turnPlayer.Buy(cardToBuy);
                 }
-                else {
-                    // panic (button should be hidden in the View when not applicable anyways!)
+                else {// panic (button should be hidden in the View when not applicable anyways!)
                 }
             }
+            // OR Look in the KingdomCards list for Action cards
             else
             {
                 // Find the first card with given title on the Game Field
@@ -166,12 +167,9 @@ namespace DominionClone.Controllers
                     currentGame.KingdomCards.Remove(cardToBuy);
                     turnPlayer.Buy(cardToBuy);
                 }
-                else {
-                    // panic (button should be hidden in the View when not applicable anyways!)
+                else {// panic (button should be hidden in the View when not applicable anyways!)
                 }
             }
-
-            
 
             HttpContext.Session.SetObjectAsJson("currentGame", currentGame);
             return RedirectToAction("Game");
@@ -192,7 +190,8 @@ namespace DominionClone.Controllers
                 endingPlayer.Discard(0);
             }
 
-            // Switch to next player (either increment or reset to first player)
+            // Switch to next player (either increment or reset to first player = idx 0)
+            // If we've gone through both players, we increment the total number of turns passed
             if (currentGame.PlayerTurn == currentGame.Players.Count - 1) {
                 currentGame.PlayerTurn = 0;
                 currentGame.TurnsPassed++;
@@ -203,7 +202,8 @@ namespace DominionClone.Controllers
             currentGame.Players[currentGame.PlayerTurn].Actions = 1;
             currentGame.Players[currentGame.PlayerTurn].Buys = 1;
             currentGame.Players[currentGame.PlayerTurn].TreasureValueTotal = 0;
-            // Next player draws 5
+
+            // Next player's turn-starting draw
             currentGame.Players[currentGame.PlayerTurn].DrawFive();
 
             HttpContext.Session.SetObjectAsJson("currentGame", currentGame);

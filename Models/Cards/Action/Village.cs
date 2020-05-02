@@ -10,7 +10,6 @@ namespace DominionClone.Models
         //+1 Card; +2 Actions
         public override void Play(Player player)
         {
-            Console.WriteLine("\n\n\n\n test: this is Village Version");
             player.Draw();
             player.Actions += 2;
         }

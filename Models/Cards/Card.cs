@@ -26,7 +26,6 @@ namespace DominionClone.Models
 
         public virtual void Play(Player player)
         {
-            Console.WriteLine("\n\n\n\n Testing: This is the original Card version");
             player.TreasureValueTotal += TreasureValue;
         }
     }
