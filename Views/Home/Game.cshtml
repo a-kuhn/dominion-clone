@@ -48,7 +48,9 @@
                     </div>
                     @* Buy Button *@
                     <div>
-                        @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Copper").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Copper").ToList().Count > 0){
+                        @if(CurrentPlayer.TreasureValueTotal >= 0
+                            && CurrentPlayer.Buys > 0 
+                            && Model.BasicCards.Where(c => c.Title == "Copper").ToList().Count > 0){
                             <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Copper" asp-route-cardType="Treasure" class="d-inline">
                                 <button class="btn btn-warning">Buy</button>
                             </form>
@@ -68,7 +70,9 @@
                     </div>
                     @* Buy Button *@
                     <div>
-                        @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Silver").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Silver").ToList().Count > 0){
+                        @if(CurrentPlayer.TreasureValueTotal >= 3
+                            && CurrentPlayer.Buys > 0 
+                            && Model.BasicCards.Where(c => c.Title == "Silver").ToList().Count > 0){
                             <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Silver" asp-route-cardType="Treasure" class="d-inline">
                                 <button class="btn btn-warning">Buy</button>
                             </form>
@@ -88,7 +92,9 @@
                     </div>
                     @* Buy Button *@
                     <div>
-                        @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Gold").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Gold").ToList().Count > 0){
+                        @if(CurrentPlayer.TreasureValueTotal >= 6
+                            && CurrentPlayer.Buys > 0 
+                            && Model.BasicCards.Where(c => c.Title == "Gold").ToList().Count > 0){
                             <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Gold" asp-route-cardType="Treasure" class="d-inline">
                                 <button class="btn btn-warning">Buy</button>
                             </form>
@@ -108,7 +114,9 @@
                     </div>
                     @* Buy Button *@
                     <div>
-                        @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Estate").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Estate").ToList().Count > 0){
+                        @if(CurrentPlayer.TreasureValueTotal >= 2 
+                            && CurrentPlayer.Buys > 0 
+                            && Model.BasicCards.Where(c => c.Title == "Estate").ToList().Count > 0){
                             <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Estate" asp-route-cardType="Treasure" class="d-inline">
                                 <button class="btn btn-warning">Buy</button>
                             </form>
@@ -128,7 +136,9 @@
                     </div>
                     @* Buy Button *@
                     <div>
-                        @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Duchy").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Duchy").ToList().Count > 0){
+                        @if(CurrentPlayer.TreasureValueTotal >= 5
+                            && CurrentPlayer.Buys > 0 
+                            && Model.BasicCards.Where(c => c.Title == "Duchy").ToList().Count > 0){
                             <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Duchy" asp-route-cardType="Treasure" class="d-inline">
                                 <button class="btn btn-warning">Buy</button>
                             </form>
@@ -148,7 +158,9 @@
                     </div>
                     @* Buy Button *@
                     <div>
-                        @if(CurrentPlayer.TreasureValueTotal >= Model.BasicCards.FirstOrDefault(c => c.Title == "Province").Cost && CurrentPlayer.Buys > 0 && Model.BasicCards.Where(c => c.Title == "Province").ToList().Count > 0){
+                        @if(CurrentPlayer.TreasureValueTotal >= 8
+                            && CurrentPlayer.Buys > 0 
+                            && Model.BasicCards.Where(c => c.Title == "Province").ToList().Count > 0){
                             <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Province" asp-route-cardType="Treasure" class="d-inline">
                                 <button class="btn btn-warning">Buy</button>
                             </form>
@@ -171,7 +183,9 @@
                     </div>
                     @* Buy Button *@
                     <div>
-                        @if(CurrentPlayer.TreasureValueTotal >= Model.KingdomCards.FirstOrDefault(c => c.Title == "Village").Cost && CurrentPlayer.Buys > 0 && Model.KingdomCards.Where(c => c.Title == "Village").ToList().Count > 0){
+                        @if(CurrentPlayer.TreasureValueTotal >= 3
+                            && CurrentPlayer.Buys > 0 
+                            && Model.KingdomCards.Where(c => c.Title == "Village").ToList().Count > 0){
                             <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Village" asp-route-cardType="Action" class="d-inline">
                                 <button class="btn btn-warning">Buy</button>
                             </form>
@@ -191,7 +205,9 @@
                     </div>
                     @* Buy Button *@
                     <div>
-                        @if(CurrentPlayer.TreasureValueTotal >= Model.KingdomCards.FirstOrDefault(c => c.Title == "Smithy").Cost && CurrentPlayer.Buys > 0 && Model.KingdomCards.Where(c => c.Title == "Smithy").ToList().Count > 0){
+                        @if(CurrentPlayer.TreasureValueTotal >= 4
+                            && CurrentPlayer.Buys > 0 
+                            && Model.KingdomCards.Where(c => c.Title == "Smithy").ToList().Count > 0){
                             <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Smithy" asp-route-cardType="Action" class="d-inline">
                                 <button class="btn btn-warning">Buy</button>
                             </form>
@@ -211,7 +227,9 @@
                     </div>
                     @* Buy Button *@
                     <div>
-                        @if(CurrentPlayer.TreasureValueTotal >= Model.KingdomCards.FirstOrDefault(c => c.Title == "Festival").Cost && CurrentPlayer.Buys > 0 && Model.KingdomCards.Where(c => c.Title == "Festival").ToList().Count > 0){
+                        @if(CurrentPlayer.TreasureValueTotal >= 5
+                            && CurrentPlayer.Buys > 0 
+                            && Model.KingdomCards.Where(c => c.Title == "Festival").ToList().Count > 0){
                             <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Festival" asp-route-cardType="Action" class="d-inline">
                                 <button class="btn btn-warning">Buy</button>
                             </form>
@@ -231,7 +249,9 @@
                     </div>
                     @* Buy Button *@
                     <div>
-                        @if(CurrentPlayer.TreasureValueTotal >= Model.KingdomCards.FirstOrDefault(c => c.Title == "Market").Cost && CurrentPlayer.Buys > 0 && Model.KingdomCards.Where(c => c.Title == "Market").ToList().Count > 0){
+                        @if(CurrentPlayer.TreasureValueTotal >= 5
+                            && CurrentPlayer.Buys > 0 
+                            && Model.KingdomCards.Where(c => c.Title == "Market").ToList().Count > 0){
                             <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Market" asp-route-cardType="Action" class="d-inline">
                                 <button class="btn btn-warning">Buy</button>
                             </form>
