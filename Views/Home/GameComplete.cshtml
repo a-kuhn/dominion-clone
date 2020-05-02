@@ -21,41 +21,47 @@
 
         <h2>Game completed in @Model.TurnsPassed turns.</h2>
 
-        <form asp-controller="Home" asp-action="NewGame" method="POST">
-            <button class="btn btn-success">Another Game?</button>
-        </form>
+        <div class="row">
+            <form asp-controller="Home" asp-action="Index" class="mx-auto">
+                <button class="btn btn-success">Home</button>
+            </form>
+            <form asp-controller="Home" asp-action="NewGame" method="POST" class="mx-auto">
+                <button class="btn btn-warning">Another Game?</button>
+            </form>
+        </div>
+
 
     </div>
     <table class="table table-bordered table-light mt-4">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Player</th>
-      <th scope="col">VP</th>
-      <th scope="col">Copper</th>
-      <th scope="col">Silver</th>
-      <th scope="col">Gold</th>
-      <th scope="col">Estate</th>
-      <th scope="col">Duchy</th>
-      <th scope="col">Province</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-    <tbody>
-        @foreach(Player player in Model.Players){
-            var CombinedCards = player.Hand.Concat(player.Deck).Concat(player.DiscardPile).Concat(player.InPlay).ToList();
-
-            <tr class="table-active">
-                <td>@player.Name</td>
-                <td>@player.TotalVP</td>
-                <td>@CombinedCards.Where(c=>c.Title == "Copper").ToList().Count</td>
-                <td>@CombinedCards.Where(c=>c.Title == "Silver").ToList().Count</td>
-                <td>@CombinedCards.Where(c=>c.Title == "Gold").ToList().Count</td>
-                <td>@CombinedCards.Where(c=>c.Title == "Estate").ToList().Count</td>
-                <td>@CombinedCards.Where(c=>c.Title == "Duchy").ToList().Count</td>
-                <td>@CombinedCards.Where(c=>c.Title == "Province").ToList().Count</td>
-                <td>@CombinedCards.Where(c=>c.Type == "Action").ToList().Count</td>
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Player</th>
+                <th scope="col">VP</th>
+                <th scope="col">Copper</th>
+                <th scope="col">Silver</th>
+                <th scope="col">Gold</th>
+                <th scope="col">Estate</th>
+                <th scope="col">Duchy</th>
+                <th scope="col">Province</th>
+                <th scope="col">Action</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach(Player player in Model.Players){
+                var CombinedCards = player.Hand.Concat(player.Deck).Concat(player.DiscardPile).Concat(player.InPlay).ToList();
+
+                <tr class="table-active">
+                    <td>@player.Name</td>
+                    <td>@player.TotalVP</td>
+                    <td>@CombinedCards.Where(c=>c.Title == "Copper").ToList().Count</td>
+                    <td>@CombinedCards.Where(c=>c.Title == "Silver").ToList().Count</td>
+                    <td>@CombinedCards.Where(c=>c.Title == "Gold").ToList().Count</td>
+                    <td>@CombinedCards.Where(c=>c.Title == "Estate").ToList().Count</td>
+                    <td>@CombinedCards.Where(c=>c.Title == "Duchy").ToList().Count</td>
+                    <td>@CombinedCards.Where(c=>c.Title == "Province").ToList().Count</td>
+                    <td>@CombinedCards.Where(c=>c.Type == "Action").ToList().Count</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </body>
