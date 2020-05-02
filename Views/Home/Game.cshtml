@@ -277,48 +277,7 @@
 
     @* Player Cards *@
     <div class="row mt-4 ml-5">
-        @* Discard and Deck*@
-        <div class="col-md-2">
-            <div class="d-inline-block">
-                <h3 class="text-center">Discard (@CurrentPlayer.DiscardPile.Count)</h3>
-
-                @if(CPDiscardPile.Count > 0){
-                    <img style="width: 100px" src="~/images/Dominion@(CPDiscardPile[CPDiscardPile.Count-1].Title).png" alt="Back">
-                }
-                else{
-                    <div style="width: 100px; height: 150px" class="border border-dark d-inline-block align-middle"></div>
-                }   
-            </div>
-        </div>
-        <div class="col-md-1 mr-5">
-            <div class="d-inline-block">
-                <h3 class="text-center">Deck (@CurrentPlayer.Deck.Count)</h3>
-                <img style="width: 100px" src="~/images/DominionBack.png" alt="Back">                
-            </div>
-        </div>
-
-        @* Current Player hand *@
-        <div class="text-center">
-            <h3>Hand (@CurrentPlayer.Hand.Count)</h3>
-            @for (int i = 0; i < CurrentPlayer.Hand.Count; i++)
-            {
-                Card card = CurrentPlayer.Hand[i];
-                @if(card.Type == "Victory" || (card.Type == "Action" && CurrentPlayer.Actions == 0))
-                {
-                    <div class="d-inline-block align-top">
-                        <img style="width: 100px" src="~/images/Dominion@(card.Title).png" alt="@(card.Title)">
-                    </div>
-                }
-                else
-                {
-                    <div class="d-inline-block align-top">
-                        <form asp-controller="Home" asp-action="Play" method="POST" asp-route-HandIndex=@i>
-                            <button class="card-glow"><img style="width: 100px" src="~/images/Dominion@(card.Title).png" alt="@(card.Title)"></button>
-                        </form>
-                    </div>
-                }
-            }
-        </div>
+        <partial name="_PlayerCardsPartial" />
     </div>
 
     @* Command Buttons. Fix eventually to show up only when appropriate. *@
