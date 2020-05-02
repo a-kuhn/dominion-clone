@@ -164,6 +164,20 @@ namespace DominionClone.Models
                 if (card.Title == "Gold"){ counters["Gold"]++;}
             }
 
+            // Repeated for Action Cards. When we move to adding more / picking random, add logic to only check for the ones that existed at game start.
+            counters.Add("Village",0);
+            counters.Add("Smithy",0);
+            counters.Add("Festival",0);
+            counters.Add("Market",0);
+            foreach (Card card in KingdomCards)
+            {
+                if (card.Title == "Village"){ counters["Village"]++;}
+                if (card.Title == "Smithy"){ counters["Smithy"]++;}
+                if (card.Title == "Festival"){ counters["Festival"]++;}
+                if (card.Title == "Market"){ counters["Market"]++;}
+            }
+
+
             // Count the zeros
             int depleted_card_types = 0;
             foreach (KeyValuePair<string, int> item in counters)
@@ -182,6 +196,3 @@ namespace DominionClone.Models
         }
     }
 }
-
-
-// add Kingdom Cards to be checked in GameFinished()
