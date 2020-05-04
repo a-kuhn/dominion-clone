@@ -45,7 +45,7 @@ namespace DominionClone.Controllers
             return View(currentGame);
         }
 
-        // Helper Method
+        // Helper Method - Get or make a Game object from session
         public Game GetGameFromSession()
         {
             Game currentGame = null;
@@ -62,6 +62,41 @@ namespace DominionClone.Controllers
             return currentGame;
         }
 
+        // Helper Method - Play an Action Card
+        public void PlayActionCard(Game currentGame, string ActionCardTitle)
+        {
+            Player turnPlayer = currentGame.Players[currentGame.PlayerTurn];
+            if (ActionCardTitle == "Village")
+            {
+                turnPlayer.Draw();
+                turnPlayer.Actions += 2;
+                return;
+            }
+            else if (ActionCardTitle == "Smithy")
+            {
+                turnPlayer.Draw();
+                turnPlayer.Draw();
+                turnPlayer.Draw();
+                return;
+            }
+            else if (ActionCardTitle == "Festival")
+            {
+                turnPlayer.TreasureValueTotal += 2;
+                turnPlayer.Actions ++;
+                turnPlayer.Buys++;
+                return;
+            }
+            else if (ActionCardTitle == "Market")
+            {
+                turnPlayer.Draw();
+                turnPlayer.TreasureValueTotal ++;
+                turnPlayer.Actions ++;
+                turnPlayer.Buys++;
+                return;
+            }
+            return;
+        }
+
         // For PLAY buttons on Player Hand
         [HttpPost("/play")]
         public IActionResult Play(int HandIndex)
@@ -72,37 +107,14 @@ namespace DominionClone.Controllers
             // player.Play(idx) removes the card from player.hand and returns it
             Card cardToPlay = turnPlayer.Play(HandIndex);
 
-// R E F A C T O R???
+            // Action Cards
             if(cardToPlay.Type == "Action")
             {
-                if (cardToPlay.Title == "Village")
-                {
-                    turnPlayer.Draw();
-                    turnPlayer.Actions += 2;
-                }
-                else if (cardToPlay.Title == "Smithy")
-                {
-                    turnPlayer.Draw();
-                    turnPlayer.Draw();
-                    turnPlayer.Draw();
-                }
-                else if (cardToPlay.Title == "Festival")
-                {
-                    turnPlayer.TreasureValueTotal += 2;
-                    turnPlayer.Actions ++;
-                    turnPlayer.Buys++;
-                }
-                else if (cardToPlay.Title == "Market")
-                {
-                    turnPlayer.Draw();
-                    turnPlayer.TreasureValueTotal ++;
-                    turnPlayer.Actions ++;
-                    turnPlayer.Buys++;
-                }
-
+                PlayActionCard(currentGame, cardToPlay.Title);
                 turnPlayer.Actions--;
             }
             // Treasure Cards
+            // If Victory Cards ever accidentally get to here, there is no issue
             else
             {
                 cardToPlay.Play(turnPlayer);
