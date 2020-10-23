@@ -18,14 +18,14 @@
             && Model.KingdomCards.Where(c => c.Title == "Village").ToList().Count > 0)
             {
                 <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Village" asp-route-cardType="Action">
-                    <button class="card-glow">
+                    <button class="card-glow round-corners">
                         <img style="width: 120px" src="~/images/DominionVillage.png" alt="Village">
                     </button>
                 </form>
             }
             else
             {
-                <img style="width: 130px" src="~/images/DominionVillage.png" alt="Village"> 
+                <img style="width: 130px" src="~/images/DominionVillage.png" alt="Village" class="round-corners"> 
             }
         }
     </div>
@@ -55,14 +55,14 @@
             && Model.KingdomCards.Where(c => c.Title == "Smithy").ToList().Count > 0)
             {
                 <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Smithy" asp-route-cardType="Action">
-                    <button class="card-glow">
+                    <button class="card-glow round-corners">
                         <img style="width: 120px" src="~/images/DominionSmithy.png" alt="Smithy">
                     </button>
                 </form>
             }
             else
             {
-                <img style="width: 130px" src="~/images/DominionSmithy.png" alt="Smithy"> 
+                <img style="width: 130px" src="~/images/DominionSmithy.png" alt="Smithy" class="round-corners"> 
             }
         }
     </div>
@@ -82,14 +82,14 @@
             && Model.KingdomCards.Where(c => c.Title == "Festival").ToList().Count > 0)
             {
                 <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Festival" asp-route-cardType="Action">
-                    <button class="card-glow">
+                    <button class="card-glow round-corners">
                         <img style="width: 120px" src="~/images/DominionFestival.png" alt="Festival">
                     </button>
                 </form>
             }
             else
             {
-                <img style="width: 130px" src="~/images/DominionFestival.png" alt="Festival"> 
+                <img style="width: 130px" src="~/images/DominionFestival.png" alt="Festival" class="round-corners"> 
             }
         }
     </div>
@@ -109,14 +109,14 @@
             && Model.KingdomCards.Where(c => c.Title == "Market").ToList().Count > 0)
             {
                 <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Market" asp-route-cardType="Action">
-                    <button class="card-glow">
+                    <button class="card-glow round-corners">
                         <img style="width: 120px" src="~/images/DominionMarket.png" alt="Market">
                     </button>
                 </form>
             }
             else
             {
-                <img style="width: 130px" src="~/images/DominionMarket.png" alt="Market"> 
+                <img style="width: 130px" src="~/images/DominionMarket.png" alt="Market" class="round-corners"> 
             }
         }
     </div>

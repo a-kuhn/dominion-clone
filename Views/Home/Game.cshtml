@@ -14,17 +14,30 @@
 <div class="row"><div class="col">
 
     @* Player Info*@
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-md-6 text-center mb-2">
+            @if(CurrentPlayer.Name == "King"){
             <div class="border border-dark d-inline-block p-3 bg-dark rounded">
                 <h3 class="mt-0 mb-0 text-white"> Player: @CurrentPlayer.Name, VP: @CurrentPlayer.TotalVP</h3>
             </div>
+            }
+            else{
+            <div class="border border-dark d-inline-block p-3 bg-light rounded">
+                <h3 class="mt-0 mb-0 text-dark"> Player: @CurrentPlayer.Name, VP: @CurrentPlayer.TotalVP</h3>
+            </div>
+            }
         </div>
         @* Current Player Turn Stats *@
         <div class="col-md-6 text-center mb-2">
-            <div class="border border-dark d-inline-block p-3 bg-dark rounded">
-                <h3 class="mt-0 mb-0 text-white"> Actions: @CurrentPlayer.Actions, Buys: @CurrentPlayer.Buys, Treasure Total: @CurrentPlayer.TreasureValueTotal</h3>
-            </div>
+            @if(CurrentPlayer.Name =="King"){
+                <div class="border border-dark d-inline-block p-3 bg-dark rounded">
+                    <h3 class="mt-0 mb-0 text-white"> Actions: @CurrentPlayer.Actions, Buys: @CurrentPlayer.Buys, Treasure Total: @CurrentPlayer.TreasureValueTotal</h3>
+                </div>}
+            else{
+                <div class="border border-dark d-inline-block p-3 bg-light rounded">
+                    <h3 class="mt-0 mb-0 text-dark"> Actions: @CurrentPlayer.Actions, Buys: @CurrentPlayer.Buys, Treasure Total: @CurrentPlayer.TreasureValueTotal</h3>
+                </div>
+            }
         </div>
     </div>
 
@@ -52,7 +65,7 @@
             {
                 Card card = CurrentPlayer.InPlay[i];
                 <div class="d-inline-block">
-                    <img style="width: 70px" src="~/images/Dominion@(card.Title).png" alt="@(card.Title)">
+                    <img style="width: 70px" src="~/images/Dominion@(card.Title).png" alt="@(card.Title)" class="round-corners">
                 </div>
             }
         </div>
@@ -64,7 +77,7 @@
     </div>
 
     @* Command Buttons *@
-    <div class="row mt-4 ml-5">
+    <div class="row my-4 justify-content-center">
         @* Play All Treasures Button *@
         @{
             int TreasureCardCount = 0;
@@ -89,8 +102,8 @@
     </div> 
     
     @* Ragequit Button *@
-    <div class="d-flex justify-content-end">
-        <a class="btn btn-danger text-center mr-3" asp-controller="Home" asp-action="GameComplete">End Game</a>
+    <div class="d-flex justify-content-around">
+        <a class="btn btn-danger text-center " asp-controller="Home" asp-action="GameComplete">End Game</a>
     </div>
 </div></div>
 </body>

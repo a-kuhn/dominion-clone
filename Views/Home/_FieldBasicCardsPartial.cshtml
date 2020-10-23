@@ -18,14 +18,14 @@
         && Model.BasicCards.Where(c => c.Title == "Copper").ToList().Count > 0)
         {
             <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Copper" asp-route-cardType="Treasure">
-                <button class="card-glow">
-                    <img style="width: 120px" src="~/images/DominionCopper.png" alt="Copper">
+                <button class="card-glow round-corners">
+                    <img style="width: 120px" src="~/images/DominionCopper.png" alt="Copper" class="">
                 </button>
             </form>
         }
         else
         {
-            <img style="width: 130px" src="~/images/DominionCopper.png" alt="Copper"> 
+            <img style="width: 130px" src="~/images/DominionCopper.png" alt="Copper" class="round-corners"> 
         }
     }
     </div>
@@ -55,14 +55,14 @@
         && Model.BasicCards.Where(c => c.Title == "Silver").ToList().Count > 0)
         {
             <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Silver" asp-route-cardType="Treasure">
-                <button class="card-glow">
+                <button class="card-glow round-corners">
                     <img style="width: 120px" src="~/images/DominionSilver.png" alt="Silver">
                 </button>
             </form>
         }
         else
         {
-            <img style="width: 130px" src="~/images/DominionSilver.png" alt="Silver"> 
+            <img style="width: 130px" src="~/images/DominionSilver.png" alt="Silver" class="round-corners"> 
         }
     }
     </div>
@@ -82,14 +82,14 @@
         && Model.BasicCards.Where(c => c.Title == "Gold").ToList().Count > 0)
         {
             <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Gold" asp-route-cardType="Treasure">
-                <button class="card-glow">
+                <button class="card-glow round-corners">
                     <img style="width: 120px" src="~/images/DominionGold.png" alt="Gold">
                 </button>
             </form>
         }
         else
         {
-            <img style="width: 130px" src="~/images/DominionGold.png" alt="Gold"> 
+            <img style="width: 130px" src="~/images/DominionGold.png" alt="Gold" class="round-corners"> 
         }
     }
     </div>
@@ -109,14 +109,14 @@
         && Model.BasicCards.Where(c => c.Title == "Estate").ToList().Count > 0)
         {
             <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Estate" asp-route-cardType="Victory">
-                <button class="card-glow">
+                <button class="card-glow round-corners">
                     <img style="width: 120px" src="~/images/DominionEstate.png" alt="Estate">
                 </button>
             </form>
         }
         else
         {
-            <img style="width: 130px" src="~/images/DominionEstate.png" alt="Estate"> 
+            <img style="width: 130px" src="~/images/DominionEstate.png" alt="Estate" class="round-corners"> 
         }
     }
     </div>
@@ -136,14 +136,14 @@
         && Model.BasicCards.Where(c => c.Title == "Duchy").ToList().Count > 0)
         {
             <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Duchy" asp-route-cardType="Victory">
-                <button class="card-glow">
+                <button class="card-glow round-corners">
                     <img style="width: 120px" src="~/images/DominionDuchy.png" alt="Duchy">
                 </button>
             </form>
         }
         else
         {
-            <img style="width: 130px" src="~/images/DominionDuchy.png" alt="Duchy"> 
+            <img style="width: 130px" src="~/images/DominionDuchy.png" alt="Duchy" class="round-corners"> 
         }
     }
     </div>
@@ -163,14 +163,14 @@
         && Model.BasicCards.Where(c => c.Title == "Province").ToList().Count > 0)
         {
             <form asp-controller="Home" asp-action="Buy" method="POST" asp-route-cardTitle="Province" asp-route-cardType="Victory">
-                <button class="card-glow">
+                <button class="card-glow round-corners">
                     <img style="width: 120px" src="~/images/DominionProvince.png" alt="Province">
                 </button>
             </form>
         }
         else
         {
-            <img style="width: 130px" src="~/images/DominionProvince.png" alt="Province"> 
+            <img style="width: 130px" src="~/images/DominionProvince.png" alt="Province" class="round-corners"> 
         }
     }
     </div>
